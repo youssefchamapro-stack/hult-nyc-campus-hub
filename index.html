@@ -587,6 +587,53 @@
             box-shadow: 0 20px 60px rgba(192, 0, 106, 0.2);
         }
 
+        /* Select mode */
+        .gallery-item .select-checkbox {
+            display: none;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            z-index: 5;
+            border: 2px solid var(--magenta);
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: white;
+            transition: all 0.2s;
+        }
+
+        body.select-mode .gallery-item .select-checkbox { display: flex; }
+        body.select-mode .gallery-item:hover { transform: scale(1.02); }
+
+        .gallery-item.selected .select-checkbox {
+            background: var(--magenta);
+        }
+
+        .gallery-item.selected {
+            outline: 3px solid var(--magenta);
+            outline-offset: 2px;
+        }
+
+        .select-toolbar {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: var(--navy);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 1.5rem;
+        }
+
+        .select-toolbar.visible { display: flex; }
+
         .gallery-item img {
             width: 100%;
             height: 100%;
@@ -1467,12 +1514,25 @@
                 </div>
             </div>
 
-            <div class="gallery-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="week1">Week 1</button>
-                <button class="filter-btn" data-filter="week2">Week 2</button>
-                <button class="filter-btn" data-filter="week3">Week 3</button>
-                <button class="filter-btn" data-filter="week4">Week 4</button>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;">
+                <div class="gallery-filters" style="margin-bottom:0;">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="week1">Week 1</button>
+                    <button class="filter-btn" data-filter="week2">Week 2</button>
+                    <button class="filter-btn" data-filter="week3">Week 3</button>
+                    <button class="filter-btn" data-filter="week4">Week 4</button>
+                </div>
+                <button id="selectModeBtn" onclick="toggleSelectMode()" style="padding:0.7rem 1.4rem;border:2px solid var(--navy);background:transparent;color:var(--navy);border-radius:50px;font-weight:600;cursor:pointer;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s;">☑ Select Photos</button>
+            </div>
+
+            <!-- Select toolbar -->
+            <div class="select-toolbar" id="selectToolbar">
+                <span id="selectCount" style="font-weight:600;">0 selected</span>
+                <div style="display:flex;gap:0.8rem;flex-wrap:wrap;">
+                    <button onclick="selectAll()" style="padding:0.5rem 1.2rem;background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);border-radius:50px;cursor:pointer;font-size:0.85rem;font-weight:600;">Select All</button>
+                    <button onclick="downloadSelected()" id="downloadSelectedBtn" style="padding:0.5rem 1.2rem;background:var(--gold);color:var(--navy);border:none;border-radius:50px;cursor:pointer;font-size:0.85rem;font-weight:700;">⬇ Download Selected</button>
+                    <button onclick="toggleSelectMode()" style="padding:0.5rem 1.2rem;background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);border-radius:50px;cursor:pointer;font-size:0.85rem;">Cancel</button>
+                </div>
             </div>
 
             <div id="galleryEmpty" style="display:none;text-align:center;padding:4rem 2rem;color:#999;">
@@ -1490,6 +1550,7 @@
             <div class="lightbox-close" id="lightboxClose">&times;</div>
             <img id="lightboxImage" class="lightbox-image" src="" alt="">
             <p class="lightbox-caption" id="lightboxCaption"></p>
+            <a id="lightboxDownload" href="#" download style="display:inline-block;margin-top:1rem;padding:0.6rem 1.5rem;background:var(--gold);color:var(--navy);border-radius:50px;font-weight:700;font-size:0.85rem;text-decoration:none;letter-spacing:0.5px;transition:opacity 0.2s;">⬇ Download</a>
         </div>
     </div>
 
@@ -1730,6 +1791,11 @@
         function openLightbox(src, caption) {
             lightboxImage.src = src;
             lightboxCaption.textContent = caption;
+            // Use Cloudinary's fl_attachment flag to force download of full-res image
+            const downloadUrl = src.includes('/upload/') ? src.replace('/upload/', '/upload/fl_attachment/') : src;
+            const dlBtn = document.getElementById('lightboxDownload');
+            dlBtn.href = downloadUrl;
+            dlBtn.download = caption ? caption.replace(/\s+/g, '_') + '.jpg' : 'hult_nyc_photo.jpg';
             lightbox.classList.add('active');
         }
 
@@ -1743,6 +1809,67 @@
             });
         });
 
+        // SELECT MODE
+        let selectMode = false;
+
+        function toggleSelectMode() {
+            selectMode = !selectMode;
+            document.body.classList.toggle('select-mode', selectMode);
+            document.getElementById('selectToolbar').classList.toggle('visible', selectMode);
+            const btn = document.getElementById('selectModeBtn');
+            btn.textContent = selectMode ? '✕ Exit Select' : '☑ Select Photos';
+            btn.style.background = selectMode ? 'var(--navy)' : 'transparent';
+            btn.style.color = selectMode ? 'white' : 'var(--navy)';
+            if (!selectMode) {
+                document.querySelectorAll('.gallery-item.selected').forEach(el => el.classList.remove('selected'));
+                updateSelectCount();
+            }
+        }
+
+        function updateSelectCount() {
+            const n = document.querySelectorAll('.gallery-item.selected').length;
+            document.getElementById('selectCount').textContent = `${n} selected`;
+        }
+
+        function selectAll() {
+            document.querySelectorAll('.gallery-item').forEach(el => el.classList.add('selected'));
+            updateSelectCount();
+        }
+
+        async function downloadSelected() {
+            const selected = document.querySelectorAll('.gallery-item.selected');
+            if (!selected.length) { showToast('No photos selected', 'error'); return; }
+
+            showToast(`Downloading ${selected.length} photo${selected.length !== 1 ? 's' : ''}...`, 'info');
+
+            for (const item of selected) {
+                const img = item.querySelector('img');
+                const caption = item.getAttribute('data-caption') || 'hult_nyc_photo';
+                const src = img.src;
+                const downloadUrl = src.includes('/upload/') ? src.replace('/upload/', '/upload/fl_attachment/') : src;
+
+                try {
+                    const res = await fetch(downloadUrl);
+                    const blob = await res.blob();
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = caption.replace(/\s+/g, '_') + '.jpg';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    await new Promise(r => setTimeout(r, 400)); // slight delay between downloads
+                } catch (e) {
+                    const a = document.createElement('a');
+                    a.href = downloadUrl;
+                    a.download = caption.replace(/\s+/g, '_') + '.jpg';
+                    a.target = '_blank';
+                    a.click();
+                }
+            }
+
+            showToast('Download complete!', 'success');
+        }
+
         // BUILD GALLERY ITEM
         function createGalleryItem(photo) {
             const week = photo.week || 'all';
@@ -1755,10 +1882,18 @@
             el.setAttribute('data-week', week);
             el.setAttribute('data-caption', caption);
             el.innerHTML = `
+                <div class="select-checkbox">✓</div>
                 <img src="${thumbUrl}" alt="${caption}" loading="lazy">
                 <div class="gallery-caption"><div class="gallery-caption-title">${caption}</div></div>
             `;
-            el.addEventListener('click', () => openLightbox(url, caption));
+            el.addEventListener('click', () => {
+                if (selectMode) {
+                    el.classList.toggle('selected');
+                    updateSelectCount();
+                } else {
+                    openLightbox(url, caption);
+                }
+            });
             return el;
         }
 
