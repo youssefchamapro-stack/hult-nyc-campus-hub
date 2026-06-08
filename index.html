@@ -1109,24 +1109,43 @@
         }
 
         /* ADMIN MODE — EDITABLE TEXT */
-        body.admin-mode .hero-title,
-        body.admin-mode .hero-subtitle {
-            outline: 2px dashed rgba(200,168,75,0.6);
-            cursor: text;
+        body.admin-mode [data-editable] {
+            outline: 2px dashed rgba(200,168,75,0.45);
             border-radius: 4px;
-            padding: 2px 4px;
+            cursor: text;
+            transition: outline-color 0.2s;
+            min-width: 20px;
+            display: inline-block;
         }
 
-        body.admin-mode .info-value {
-            outline: 2px dashed rgba(10,31,92,0.3);
-            cursor: text;
-            border-radius: 4px;
-            padding: 2px 4px;
-            position: relative;
+        body.admin-mode [data-editable]:hover,
+        body.admin-mode [data-editable]:focus {
+            outline-color: var(--gold);
+            outline-width: 2px;
+            outline-style: solid;
+            background: rgba(200,168,75,0.08);
         }
 
-        body.admin-mode .info-value:hover {
-            outline-color: var(--magenta);
+        /* on dark backgrounds use white dashes */
+        #events [data-editable],
+        #calendar [data-editable],
+        #info [data-editable],
+        .hero [data-editable] {
+            outline-color: rgba(255,255,255,0.4);
+        }
+
+        #events [data-editable]:hover,
+        #calendar [data-editable]:hover,
+        #info [data-editable]:hover,
+        .hero [data-editable]:hover {
+            outline-color: var(--gold);
+            background: rgba(200,168,75,0.12);
+        }
+
+        body.admin-mode [data-editable]:empty:before {
+            content: attr(data-placeholder);
+            opacity: 0.4;
+            font-style: italic;
         }
 
         /* INLINE EDIT MODAL */
@@ -1647,13 +1666,13 @@
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
 <div class="hero-content">
-            <h1 class="hero-title" id="heroTitle">New York Campus Hub <span class="gold">2025</span></h1>
-            <p class="hero-subtitle" id="heroSubtitle">Your central place for schedule, events, photos & everything NYC</p>
+            <h1 class="hero-title" id="heroTitle" data-editable data-key="hero-title" data-placeholder="Campus Hub Title">New York Campus Hub <span class="gold">2025</span></h1>
+            <p class="hero-subtitle" id="heroSubtitle" data-editable data-key="hero-subtitle" data-placeholder="Subtitle">Your central place for schedule, events, photos & everything NYC</p>
             <div class="pill-tags">
-                <span class="pill">✈ 42 Students</span>
-                <span class="pill">📅 Jun 22 – Jul 19, 2025</span>
-                <span class="pill">🗽 New York City</span>
-                <span class="pill">🎓 Hult International</span>
+                <span class="pill" data-editable data-key="pill-students" data-placeholder="Students">✈ 42 Students</span>
+                <span class="pill" data-editable data-key="pill-dates" data-placeholder="Dates">📅 Jun 22 – Jul 19, 2025</span>
+                <span class="pill" data-editable data-key="pill-city" data-placeholder="City">🗽 New York City</span>
+                <span class="pill" data-editable data-key="pill-school" data-placeholder="School">🎓 Hult International</span>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -1667,8 +1686,8 @@
     <section id="schedule" class="section">
         <div class="container">
             <div class="section-header">
-                <p class="eyebrow">Academic Program</p>
-                <h2 class="section-title">Course Schedule</h2>
+                <p class="eyebrow"><span data-editable data-key="eyebrow-schedule" data-placeholder="Eyebrow">Academic Program</span></p>
+                <h2 class="section-title"><span data-editable data-key="title-schedule" data-placeholder="Title">Course Schedule</span></h2>
                 <div class="divider"></div>
             </div>
             <!-- Week labels -->
@@ -1772,8 +1791,8 @@
     <section id="events" class="section">
         <div class="container">
             <div class="section-header">
-                <p class="eyebrow">NYC Adventures</p>
-                <h2 class="section-title">Upcoming Events</h2>
+                <p class="eyebrow"><span data-editable data-key="eyebrow-events" data-placeholder="Eyebrow">NYC Adventures</span></p>
+                <h2 class="section-title"><span data-editable data-key="title-events" data-placeholder="Title">Upcoming Events</span></h2>
                 <div class="divider"></div>
             </div>
             <div class="events-grid" id="eventsGrid">
@@ -1997,8 +2016,8 @@
     <section id="calendar" class="section">
         <div class="container">
             <div class="section-header">
-                <p class="eyebrow">Full Program Overview</p>
-                <h2 class="section-title">Calendar</h2>
+                <p class="eyebrow"><span data-editable data-key="eyebrow-calendar" data-placeholder="Eyebrow">Full Program Overview</span></p>
+                <h2 class="section-title"><span data-editable data-key="title-calendar" data-placeholder="Title">Calendar</span></h2>
                 <div class="divider"></div>
             </div>
             <div class="cal-month-tabs">
@@ -2019,8 +2038,8 @@
     <section id="gallery" class="section">
         <div class="container">
             <div class="section-header">
-                <p class="eyebrow">Memories</p>
-                <h2 class="section-title">Photo Gallery</h2>
+                <p class="eyebrow"><span data-editable data-key="eyebrow-gallery" data-placeholder="Eyebrow">Memories</span></p>
+                <h2 class="section-title"><span data-editable data-key="title-gallery" data-placeholder="Title">Photo Gallery</span></h2>
                 <div class="divider"></div>
             </div>
 
@@ -2091,8 +2110,8 @@
     <section id="info" class="section">
         <div class="container">
             <div class="section-header">
-                <p class="eyebrow">About Us</p>
-                <h2 class="section-title">NYC Campus Experience</h2>
+                <p class="eyebrow"><span data-editable data-key="eyebrow-info" data-placeholder="Eyebrow">About Us</span></p>
+                <h2 class="section-title"><span data-editable data-key="title-info" data-placeholder="Title">NYC Campus Experience</span></h2>
                 <div class="divider"></div>
             </div>
             <div class="stats-box">
@@ -2120,10 +2139,10 @@
 
             <div class="info-container">
                 <div class="info-text">
-                    <p>Welcome to Hult International Business School's New York City campus! This is an exclusive 4-week intensive business program designed for globally-minded students seeking to immerse themselves in one of the world's most dynamic cities.</p>
-                    <p>Our curriculum combines rigorous academic learning with real-world business exposure. You'll study cutting-edge topics in innovation, entrepreneurship, and leadership while networking with industry leaders and fellow ambitious students.</p>
-                    <p>Beyond the classroom, New York City is your learning playground. From Wall Street finance to Brooklyn's startup scene, from Broadway culture to world-class museums, you'll experience the full spectrum of what makes NYC the global business capital.</p>
-                    <p>This hub serves as your central resource for schedules, events, photos, and essential campus information. Stay connected, stay informed, and make the most of your time in New York.</p>
+                    <p data-editable data-key="info-p1" data-placeholder="Intro paragraph">Welcome to Hult International Business School's New York City campus! This is an exclusive 4-week intensive business program designed for globally-minded students seeking to immerse themselves in one of the world's most dynamic cities.</p>
+                    <p data-editable data-key="info-p2" data-placeholder="Curriculum paragraph">Our curriculum combines rigorous academic learning with real-world business exposure. You'll study cutting-edge topics in innovation, entrepreneurship, and leadership while networking with industry leaders and fellow ambitious students.</p>
+                    <p data-editable data-key="info-p3" data-placeholder="City paragraph">Beyond the classroom, New York City is your learning playground. From Wall Street finance to Brooklyn's startup scene, from Broadway culture to world-class museums, you'll experience the full spectrum of what makes NYC the global business capital.</p>
+                    <p data-editable data-key="info-p4" data-placeholder="Hub paragraph">This hub serves as your central resource for schedules, events, photos, and essential campus information. Stay connected, stay informed, and make the most of your time in New York.</p>
                 </div>
 
                 <div class="info-card">
@@ -2192,7 +2211,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-content">
-            <p class="footer-text">© 2025 Hult International Business School. New York Campus.</p>
+            <p class="footer-text"><span data-editable data-key="footer-copy" data-placeholder="Copyright text">© 2025 Hult International Business School. New York Campus.</span></p>
             <p class="footer-text" style="margin-top:0.5rem;">
                 <strong style="color:white;">Campus Director:</strong>
                 <span style="color:var(--gold);font-weight:600;"> Sara Abou Fakher Timani</span>
@@ -2202,7 +2221,7 @@
                 <a href="mailto:info@hult.edu" class="footer-link">info@hult.edu</a> |
                 <a href="tel:+12125550123" class="footer-link">+1 (212) 555-0123</a>
             </p>
-            <p style="color: var(--gold); font-weight: 600; margin-top: 1rem;">Build Your Global Future</p>
+            <p style="color: var(--gold); font-weight: 600; margin-top: 1rem;"><span data-editable data-key="footer-tagline" data-placeholder="Tagline">Build Your Global Future</span></p>
             <p style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1);">
                 <a href="#admin" onclick="toggleAdminLogin()" style="color:rgba(255,255,255,0.2);font-size:0.75rem;text-decoration:none;letter-spacing:1px;">admin</a>
             </p>
@@ -2507,11 +2526,11 @@
         function unlockAdmin() {
             if (adminPassword.value === ADMIN_PASSWORD) {
                 adminLoginModal.style.display = 'none';
-                // Enable admin mode
                 document.body.classList.add('admin-mode');
                 document.getElementById('adminModeBar').classList.add('visible');
                 adminContent.classList.remove('hidden');
-                showToast('Admin mode enabled!', 'success');
+                enableEditableText();
+                showToast('Admin mode — click any text to edit it ✏️', 'success');
             } else {
                 showToast('Incorrect password', 'error');
                 adminPassword.value = '';
@@ -2523,6 +2542,7 @@
             document.getElementById('adminModeBar').classList.remove('visible');
             adminContent.classList.add('hidden');
             adminPassword.value = '';
+            disableEditableText();
             showToast('Admin session closed', 'info');
         }
 
@@ -3058,11 +3078,73 @@
             container.innerHTML = html;
         }
 
+        // ── UNIVERSAL EDITABLE TEXT SYSTEM ──────────────────────────────
+        const SITE_TEXT_KEY = 'siteText';
+
+        // Restore all saved text on page load
+        function restoreSiteText() {
+            const saved = JSON.parse(localStorage.getItem(SITE_TEXT_KEY) || '{}');
+            document.querySelectorAll('[data-editable][data-key]').forEach(el => {
+                const k = el.getAttribute('data-key');
+                if (saved[k] !== undefined) el.innerHTML = saved[k];
+            });
+        }
+
+        // Save a single element's text
+        function saveSiteText(key, html) {
+            const saved = JSON.parse(localStorage.getItem(SITE_TEXT_KEY) || '{}');
+            saved[key] = html;
+            localStorage.setItem(SITE_TEXT_KEY, JSON.stringify(saved));
+        }
+
+        // Enable editing on all [data-editable] elements
+        function enableEditableText() {
+            document.querySelectorAll('[data-editable][data-key]').forEach(el => {
+                el.contentEditable = 'true';
+                el.spellcheck = true;
+                el.addEventListener('blur', onEditableBlur);
+                el.addEventListener('keydown', onEditableKeydown);
+            });
+        }
+
+        // Disable editing
+        function disableEditableText() {
+            document.querySelectorAll('[data-editable][data-key]').forEach(el => {
+                el.contentEditable = 'false';
+                el.removeEventListener('blur', onEditableBlur);
+                el.removeEventListener('keydown', onEditableKeydown);
+            });
+        }
+
+        function onEditableBlur(e) {
+            const key = e.target.getAttribute('data-key');
+            saveSiteText(key, e.target.innerHTML);
+            showToast('Saved ✓', 'success');
+        }
+
+        function onEditableKeydown(e) {
+            // Esc = cancel edit, blur without saving
+            if (e.key === 'Escape') {
+                const saved = JSON.parse(localStorage.getItem(SITE_TEXT_KEY) || '{}');
+                const key = e.target.getAttribute('data-key');
+                if (saved[key] !== undefined) e.target.innerHTML = saved[key];
+                e.target.blur();
+                e.preventDefault();
+            }
+            // Shift+Enter = line break, Enter alone = finish editing
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.target.blur();
+                e.preventDefault();
+            }
+        }
+        // ────────────────────────────────────────────────────────────────
+
         // INIT
         window.addEventListener('load', () => {
             renderEvents();
             loadGallery();
             renderCalendar('june');
+            restoreSiteText();       // restore all editable text
             initHeroEditing();
             restoreInfoContent();
             restoreCourseEdits();
