@@ -1761,12 +1761,12 @@
                 </div>
             </div>
             <div class="schedule-grid">
-                <!-- Week of June 23 -->
+                <!-- Week of June 22 -->
                 <div class="course-card" data-course-id="course-1">
                     <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,var(--navy) 0%,#0d4a7a 100%);">Neuromarketing</div>
                     <div class="course-body">
-                        <p class="course-dates">📅 Week of June 23 — Weekdays (Mon–Fri)</p>
+                        <p class="course-dates">📅 Week of June 22 — Weekdays (Mon–Fri)</p>
                         <p class="course-description">Room 203 · Classroom A · 9AM–4PM</p>
                         <p class="course-professor">🟦 Classroom A</p>
                     </div>
@@ -1775,7 +1775,7 @@
                     <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,var(--teal) 0%,#0a5a52 100%);">Venture Capital</div>
                     <div class="course-body">
-                        <p class="course-dates">📅 Week of June 23 — Weekdays (Mon–Fri)</p>
+                        <p class="course-dates">📅 Week of June 22 — Weekdays (Mon–Fri)</p>
                         <p class="course-description">Room 206 · Classroom B · 9AM–4PM</p>
                         <p class="course-professor">🟩 Classroom B</p>
                     </div>
@@ -1784,7 +1784,7 @@
                     <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,var(--magenta) 0%,#8b0049 100%);">New Product Development</div>
                     <div class="course-body">
-                        <p class="course-dates">📅 Week of June 23 — Weekend (Sat–Sun)</p>
+                        <p class="course-dates">📅 Week of June 22 — Weekend (Sat–Sun)</p>
                         <p class="course-description">Room 203 · Classroom A · 9AM–5PM</p>
                         <p class="course-professor">🟦 Classroom A</p>
                     </div>
@@ -1869,7 +1869,7 @@
                     <div class="event-body">
                         <h3 class="event-title">Opening Day Happy Hour</h3>
                         <div class="event-meta">
-                            <div class="event-meta-item">📅 Monday, June 23, 2025</div>
+                            <div class="event-meta-item">📅 Monday, June 22, 2025</div>
                             <div class="event-meta-item">📍 TBD</div>
                             <div class="event-meta-item">👥 42 attendees</div>
                         </div>
@@ -3052,8 +3052,8 @@
         const CAL_DATA = { // time field shown in calendar popup
             // key: "YYYY-M-D"
             // Classes
-            '2025-6-22': [],
-            '2025-6-23': [{ type:'special', text:'🎉 Opening Day', time:'All Day' }, { type:'event', text:'🍹 Happy Hour', time:'5:00 PM' }, { type:'class', text:'Neuromarketing (A)', time:'9AM–4PM' }, { type:'class', text:'Venture Capital (B)', time:'9AM–4PM' }],
+            '2025-6-22': [{ type:'special', text:'🎉 Opening Day', time:'All Day' }, { type:'event', text:'🍹 Happy Hour', time:'5:00 PM' }, { type:'class', text:'Neuromarketing (A)', time:'9AM–4PM' }, { type:'class', text:'Venture Capital (B)', time:'9AM–4PM' }],
+            '2025-6-23': [{ type:'class', text:'Neuromarketing (A)', time:'9AM–4PM' }, { type:'class', text:'Venture Capital (B)', time:'9AM–4PM' }],
             '2025-6-24': [{ type:'class', text:'Neuromarketing (A)', time:'9AM–4PM' }, { type:'class', text:'Venture Capital (B)', time:'9AM–4PM' }],
             '2025-6-25': [{ type:'class', text:'Neuromarketing (A)', time:'9AM–4PM' }, { type:'class', text:'Venture Capital (B)', time:'9AM–4PM' }],
             '2025-6-26': [{ type:'class', text:'Neuromarketing (A)', time:'9AM–4PM' }, { type:'class', text:'Venture Capital (B)', time:'9AM–4PM' }, { type:'event', text:'🍩 Dough Nut Be Late to Class', time:'8:00 AM' }],
@@ -3094,8 +3094,7 @@
             const year = 2025;
             const monthNum = isJune ? 6 : 7;
             const daysInMonth = isJune ? 30 : 31;
-            const firstDayRaw = new Date(year, monthNum - 1, 1).getDay(); // 0=Sun
-            const firstDay = (firstDayRaw + 6) % 7; // shift so Mon=0
+            const firstDay = new Date(year, monthNum - 1, 1).getDay(); // 0=Sun (US week)
 
             // Merge admin-added events into a working copy of CAL_DATA
             const calData = JSON.parse(JSON.stringify(CAL_DATA)); // deep clone static data
@@ -3115,7 +3114,7 @@
             applyCalTimeOverrides(calData);
 
             const today = new Date();
-            const dayHeaders = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+            const dayHeaders = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
             let html = `<div class="cal-grid">`;
 
@@ -3138,7 +3137,7 @@
                 const key = `${year}-${monthNum}-${d}`;
                 const entries = calData[key] || [];
                 const isToday = today.getFullYear() === year && today.getMonth() === monthNum - 1 && today.getDate() === d;
-                const isOpening = key === '2025-6-23';
+                const isOpening = key === '2025-6-22';
                 const isClosing = key === '2025-7-19';
 
                 window._calDayEntries[month][d] = { entries, monthName: monthNames[monthNum], monthNum, day: d, year };
