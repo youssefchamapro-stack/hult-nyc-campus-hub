@@ -1124,7 +1124,6 @@
                 <li><a href="#events" class="nav-link">Events</a></li>
                 <li><a href="#gallery" class="nav-link">Gallery</a></li>
                 <li><a href="#info" class="nav-link">Info</a></li>
-                <li><a href="#admin" class="nav-link">Admin</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -1619,85 +1618,64 @@
         </div>
     </section>
 
-    <!-- ADMIN SECTION -->
-    <section id="admin" class="section">
-        <div class="container">
-            <div class="section-header">
-                <p class="eyebrow">Administrative</p>
-                <h2 class="section-title">Admin Panel</h2>
-                <div class="divider"></div>
+    <!-- ADMIN PANEL (discreet, hidden by default) -->
+    <div id="admin" style="background:var(--navy);padding:0;">
+        <div id="adminContent" class="hidden" style="max-width:900px;margin:0 auto;padding:3rem 2rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;">
+                <span style="color:white;font-weight:700;letter-spacing:1px;font-size:0.9rem;">ADMIN PANEL</span>
+                <button class="btn-logout" onclick="lockAdmin()">Logout</button>
             </div>
-
-            <div class="admin-password-section" id="adminPasswordSection">
-                <h3 style="color: var(--navy); margin-bottom: 1.5rem; font-size: 1.2rem;">Admin Access Required</h3>
-                <div class="password-input-group">
-                    <input type="password" id="adminPassword" placeholder="Enter admin password">
-                    <button class="btn btn-primary" onclick="unlockAdmin()">Unlock</button>
+            <div class="admin-panel">
+                <div class="admin-form">
+                    <h3 class="admin-form-title">Add New Event</h3>
+                    <form id="eventForm" onsubmit="addEvent(event)">
+                        <div class="form-group">
+                            <label for="eventTitle">Event Title</label>
+                            <input type="text" id="eventTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventDate">Date</label>
+                            <input type="date" id="eventDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventTime">Time</label>
+                            <input type="time" id="eventTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventLocation">Location</label>
+                            <input type="text" id="eventLocation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventDescription">Description</label>
+                            <textarea id="eventDescription" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventType">Event Type</label>
+                            <select id="eventType" required>
+                                <option value="Social">Social</option>
+                                <option value="Cultural">Cultural</option>
+                                <option value="Networking">Networking</option>
+                                <option value="Academic">Academic</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%;">Add Event</button>
+                    </form>
                 </div>
-                <p style="color: #666; font-size: 0.9rem;">Enter the administrator password to access editing tools</p>
-            </div>
-
-            <div id="adminContent" class="hidden">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 2rem;">
-                    <button class="btn-logout" onclick="lockAdmin()">Logout</button>
-                </div>
-
-                <div class="admin-panel">
-                    <div class="admin-form">
-                        <h3 class="admin-form-title">Add New Event</h3>
-                        <form id="eventForm" onsubmit="addEvent(event)">
-                            <div class="form-group">
-                                <label for="eventTitle">Event Title</label>
-                                <input type="text" id="eventTitle" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="eventDate">Date</label>
-                                <input type="date" id="eventDate" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="eventTime">Time</label>
-                                <input type="time" id="eventTime" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="eventLocation">Location</label>
-                                <input type="text" id="eventLocation" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="eventDescription">Description</label>
-                                <textarea id="eventDescription" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="eventType">Event Type</label>
-                                <select id="eventType" required>
-                                    <option value="Social">Social</option>
-                                    <option value="Cultural">Cultural</option>
-                                    <option value="Networking">Networking</option>
-                                    <option value="Academic">Academic</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">Add Event</button>
-                        </form>
-                    </div>
-
-                    <div class="admin-list">
-                        <h3 class="admin-list-title">Added Events</h3>
-                        <div id="adminEventsList"></div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 3rem; background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px var(--dark-shadow);">
-                    <h3 style="color: var(--navy); margin-bottom: 1.5rem; font-size: 1.2rem;">Upload Photo</h3>
+                <div class="admin-list">
+                    <h3 class="admin-list-title">Added Events</h3>
+                    <div id="adminEventsList"></div>
+                    <h3 class="admin-list-title" style="margin-top:2rem;">Upload Photo</h3>
                     <form id="photoForm" onsubmit="addPhoto(event)">
                         <div class="form-group">
                             <label for="photoFile">Photo File</label>
                             <input type="file" id="photoFile" accept="image/*" required>
                         </div>
                         <div class="form-group">
-                            <label for="photoCaption">Photo Caption</label>
+                            <label for="photoCaption">Caption</label>
                             <input type="text" id="photoCaption" required>
                         </div>
                         <div class="form-group">
-                            <label for="photoWeek">Week Tag</label>
+                            <label for="photoWeek">Week</label>
                             <select id="photoWeek" required>
                                 <option value="week1">Week 1</option>
                                 <option value="week2">Week 2</option>
@@ -1705,30 +1683,45 @@
                                 <option value="week4">Week 4</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-secondary" style="width: 100%;">Upload Photo</button>
+                        <button type="submit" class="btn btn-secondary" style="width:100%;">Upload Photo</button>
                     </form>
-                </div>
-
-                <div style="margin-top: 3rem; background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px var(--dark-shadow); text-align: center;">
-                    <h3 style="color: var(--navy); margin-bottom: 1rem; font-size: 1.2rem;">Edit Schedule</h3>
-                    <p style="color: #666; margin-bottom: 1.5rem;">To edit course schedule, contact the program director at <a href="mailto:l.anderson@hult.edu" style="color: var(--magenta); font-weight: 600;">l.anderson@hult.edu</a></p>
-                    <a href="mailto:l.anderson@hult.edu" class="btn btn-secondary">Email Director</a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <p class="footer-text">© 2025 Hult International Business School. New York Campus.</p>
+            <p class="footer-text" style="margin-top:0.5rem;">
+                <strong style="color:white;">Campus Director:</strong>
+                <span style="color:var(--gold);font-weight:600;"> Sara Abou Fakher Timani</span>
+                <span style="color:rgba(255,255,255,0.6);font-size:0.85rem;"> · Senior Assistant Dean</span>
+            </p>
             <p class="footer-text">
                 <a href="mailto:info@hult.edu" class="footer-link">info@hult.edu</a> |
                 <a href="tel:+12125550123" class="footer-link">+1 (212) 555-0123</a>
             </p>
             <p style="color: var(--gold); font-weight: 600; margin-top: 1rem;">Build Your Global Future</p>
+            <p style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1);">
+                <a href="#admin" onclick="toggleAdminLogin()" style="color:rgba(255,255,255,0.2);font-size:0.75rem;text-decoration:none;letter-spacing:1px;">admin</a>
+            </p>
         </div>
     </footer>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="adminLoginModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;display:none;align-items:center;justify-content:center;">
+        <div style="background:white;border-radius:20px;padding:2.5rem;max-width:380px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,0.3);text-align:center;">
+            <h3 style="color:var(--navy);margin-bottom:0.5rem;font-size:1.3rem;">Admin Access</h3>
+            <p style="color:#999;font-size:0.85rem;margin-bottom:1.5rem;">Enter your password to continue</p>
+            <div class="password-input-group" style="margin-bottom:1rem;">
+                <input type="password" id="adminPassword" placeholder="Password" style="width:100%;margin-bottom:0.8rem;">
+                <button class="btn btn-primary" onclick="unlockAdmin()" style="width:100%;">Unlock</button>
+            </div>
+            <button onclick="document.getElementById('adminLoginModal').style.display='none'" style="background:none;border:none;color:#999;cursor:pointer;font-size:0.85rem;">Cancel</button>
+        </div>
+    </div>
 
     <script>
         // NAVIGATION SCROLL SPY
@@ -1820,14 +1813,23 @@
 
         // ADMIN PANEL
         const ADMIN_PASSWORD = 'HultNYC2025';
-        const adminPasswordSection = document.getElementById('adminPasswordSection');
         const adminContent = document.getElementById('adminContent');
         const adminPassword = document.getElementById('adminPassword');
+        const adminLoginModal = document.getElementById('adminLoginModal');
+
+        function toggleAdminLogin() {
+            if (adminContent.classList.contains('hidden')) {
+                adminLoginModal.style.display = 'flex';
+                setTimeout(() => adminPassword.focus(), 100);
+            }
+            return false;
+        }
 
         function unlockAdmin() {
             if (adminPassword.value === ADMIN_PASSWORD) {
-                adminPasswordSection.classList.add('hidden');
+                adminLoginModal.style.display = 'none';
                 adminContent.classList.remove('hidden');
+                document.getElementById('admin').scrollIntoView({ behavior: 'smooth' });
                 loadAdminData();
                 showToast('Admin panel unlocked!', 'success');
             } else {
@@ -1837,7 +1839,6 @@
         }
 
         function lockAdmin() {
-            adminPasswordSection.classList.remove('hidden');
             adminContent.classList.add('hidden');
             adminPassword.value = '';
             showToast('Admin session closed', 'info');
