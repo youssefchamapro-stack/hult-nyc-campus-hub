@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hult NYC Campus Hub | 2025 Student Portal</title>
+    <style>
+        :root {
+            --navy: #0a1f5c;
+            --magenta: #c0006a;
+            --teal: #0d7a6b;
+            --gold: #c8a84b;
+            --light: #f5f3ee;
+            --dark-shadow: rgba(10, 31, 92, 0.15);
+        }
+
+        @font-face {
+            font-family: 'EFCircular';
+            src: url('https://cdn.efounders.co/fonts/ef-circular-medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'EFCircular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--light);
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 100;
+            box-shadow: 0 2px 20px var(--dark-shadow);
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            height: 70px;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--navy);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0;
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 25px 1.2rem;
+            color: var(--navy);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            border-bottom-color: var(--magenta);
+            color: var(--magenta);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--navy);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--navy) 0%, #0d2847 100%);
+            padding: 120px 2rem 80px;
+            text-align: center;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .blob {
+            position: absolute;
+            opacity: 0.1;
+            filter: blur(40px);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--magenta);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--teal);
+            border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+            bottom: -50px;
+            left: -50px;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(50px, -50px) rotate(180deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+        }
+
+        .hero-title .gold {
+            color: var(--gold);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .pill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .pill {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 30px rgba(200, 168, 75, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(200, 168, 75, 0.35);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* SECTION HEADERS */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .eyebrow {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--magenta);
+            margin-bottom: 0.8rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: var(--magenta);
+            border-radius: 2px;
+        }
+
+        /* SCHEDULE SECTION */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px var(--dark-shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(192, 0, 106, 0.15);
+        }
+
+        .course-header {
+            height: 120px;
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, var(--navy) 0%, #0d4a7a 100%);
+        }
+
+        .course-card:nth-child(2) .course-header {
+            background: linear-gradient(135deg, var(--teal) 0%, #0a5a52 100%);
+        }
+
+        .course-card:nth-child(3) .course-header {
+            background: linear-gradient(135deg, var(--magenta) 0%, #8b0049 100%);
+        }
+
+        .course-card:nth-child(4) .course-header {
+            background: linear-gradient(135deg, var(--navy) 0%, #0d4a7a 100%);
+        }
+
+        .course-card:nth-child(5) .course-header {
+            background: linear-gradient(135deg, var(--teal) 0%, #0a5a52 100%);
+        }
+
+        .course-body {
+            padding: 2rem;
+        }
+
+        .course-dates {
+            font-size: 0.9rem;
+            color: var(--magenta);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .course-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-professor {
+            font-size: 0.85rem;
+            color: var(--navy);
+            font-weight: 600;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            margin-top: 1rem;
+        }
+
+        /* EVENTS SECTION */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px var(--dark-shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(13, 122, 107, 0.15);
+        }
+
+        .event-header {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
+            padding: 2rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .event-icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .event-tag {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .event-body {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .event-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .event-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .event-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--navy);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--magenta);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(192, 0, 106, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--teal);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: var(--magenta);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(192, 0, 106, 0.3);
+        }
+
+        /* GALLERY SECTION */
+        .gallery-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--navy);
+            background: transparent;
+            color: var(--navy);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .filter-btn.active {
+            background: var(--magenta);
+            color: white;
+            border-color: var(--magenta);
+        }
+
+        .filter-btn:hover {
+            background: var(--navy);
+            color: white;
+            border-color: var(--navy);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            box-shadow: 0 10px 40px var(--dark-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(192, 0, 106, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(10, 31, 92, 0.9), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(50px);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .gallery-caption-title {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 31, 92, 0.95);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+        }
+
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.2);
+        }
+
+        /* INFO SECTION */
+        .info-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .info-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .info-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-box {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 40px var(--dark-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--magenta);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--navy);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--dark-shadow);
+        }
+
+        .info-card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: var(--magenta);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-value {
+            color: var(--navy);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* ADMIN SECTION */
+        #admin {
+            background: linear-gradient(135deg, rgba(10, 31, 92, 0.05), rgba(13, 122, 107, 0.05));
+        }
+
+        .admin-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .admin-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--dark-shadow);
+        }
+
+        .admin-form-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--magenta);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .admin-list {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--dark-shadow);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .admin-list-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-item {
+            padding: 1.5rem;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 1rem;
+        }
+
+        .admin-item-info {
+            flex-grow: 1;
+        }
+
+        .admin-item-title {
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.3rem;
+        }
+
+        .admin-item-detail {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .btn-delete {
+            background: #ff6b6b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+
+        .admin-password-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--dark-shadow);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .password-input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .password-input-group input {
+            flex-grow: 1;
+        }
+
+        .btn-logout {
+            background: var(--teal);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background: var(--magenta);
+            transform: translateY(-2px);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* TOAST NOTIFICATIONS */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--teal);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(13, 122, 107, 0.3);
+            z-index: 300;
+            animation: slideInRight 0.3s ease;
+            font-weight: 600;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            margin-bottom: 1rem;
+        }
+
+        .footer-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: white;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-links.active {
+                max-height: 400px;
+            }
+
+            .nav-links a {
+                padding: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+
+            .hero {
+                padding: 60px 2rem 40px;
+                min-height: auto;
+            }
+
+            .pill-tags {
+                gap: 0.7rem;
+            }
+
+            .pill {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+
+            .schedule-grid,
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .admin-panel {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-box {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .pill {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .stats-box {
+                grid-template-columns: 1fr;
+            }
+
+            .toast {
+                right: 1rem;
+                bottom: 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">HULT <span>NYC</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#schedule" class="nav-link">Schedule</a></li>
+                <li><a href="#events" class="nav-link">Events</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#info" class="nav-link">Info</a></li>
+                <li><a href="#admin" class="nav-link">Admin</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">New York Campus Hub <span class="gold">2025</span></h1>
+            <p class="hero-subtitle">Your central place for schedule, events, photos & everything NYC</p>
+            <div class="pill-tags">
+                <span class="pill">✈ 42 Students</span>
+                <span class="pill">📅 4-Week Program</span>
+                <span class="pill">🗽 New York City</span>
+                <span class="pill">🎓 Hult International</span>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- SCHEDULE SECTION -->
+    <section id="schedule" class="section">
+        <div class="container">
+            <div class="section-header">
+                <p class="eyebrow">Academic Program</p>
+                <h2 class="section-title">Course Schedule</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="schedule-grid">
+                <div class="course-card">
+                    <div class="course-header">Neuromarketing</div>
+                    <div class="course-body">
+                        <p class="course-dates">Week 1: July 7-11, 2025</p>
+                        <p class="course-description">Understand the science behind consumer decisions and behavioral economics</p>
+                        <p class="course-professor">👨‍🏫 Professor Dr. Elena Martinez</p>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-header">Venture Capital & Startups</div>
+                    <div class="course-body">
+                        <p class="course-dates">Week 1-2: July 14-18, 2025</p>
+                        <p class="course-description">Learn how to pitch ideas and navigate the investment landscape in Silicon Valley's ecosystem</p>
+                        <p class="course-professor">👨‍🏫 Professor James Chen</p>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-header">Strategic Innovation</div>
+                    <div class="course-body">
+                        <p class="course-dates">Week 2: July 21-25, 2025</p>
+                        <p class="course-description">Master frameworks for identifying market opportunities and creating disruptive business models</p>
+                        <p class="course-professor">👨‍🏫 Professor Sarah Williams</p>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-header">Leadership in Action</div>
+                    <div class="course-body">
+                        <p class="course-dates">Week 3: July 28 - Aug 1, 2025</p>
+                        <p class="course-description">Develop critical leadership skills through case studies and real-world scenario analysis</p>
+                        <p class="course-professor">👨‍🏫 Professor Michael Thompson</p>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-header">Capstone Project</div>
+                    <div class="course-body">
+                        <p class="course-dates">Week 4: Aug 4-8, 2025</p>
+                        <p class="course-description">Present your comprehensive business plan to industry executives and fellow students</p>
+                        <p class="course-professor">👨‍🏫 Program Director Lisa Anderson</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTS SECTION -->
+    <section id="events" class="section">
+        <div class="container">
+            <div class="section-header">
+                <p class="eyebrow">NYC Adventures</p>
+                <h2 class="section-title">Upcoming Events</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="events-grid" id="eventsGrid">
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-icon-circle">🍽️</div>
+                        <span class="event-tag">Social</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title">Welcome Dinner</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 July 7, 2025 • 7:00 PM</div>
+                            <div class="event-meta-item">📍 Rooftop Restaurant, Midtown</div>
+                        </div>
+                        <p class="event-description">Kick off the program with an elegant rooftop dinner overlooking Manhattan's skyline. Meet your classmates and faculty in a relaxed setting.</p>
+                        <a href="#" class="btn btn-primary">RSVP</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-icon-circle">🏃</div>
+                        <span class="event-tag">Social</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title">Central Park Morning Run</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 July 9, 2025 • 6:30 AM</div>
+                            <div class="event-meta-item">📍 Bethesda Terrace, Central Park</div>
+                        </div>
+                        <p class="event-description">Energize your mornings with a guided run through Central Park. All fitness levels welcome! Breakfast follows at a nearby café.</p>
+                        <a href="#" class="btn btn-primary">RSVP</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-icon-circle">🏛️</div>
+                        <span class="event-tag">Cultural</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title">Wall Street Walking Tour</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 July 12, 2025 • 2:00 PM</div>
+                            <div class="event-meta-item">📍 Stock Exchange, Financial District</div>
+                        </div>
+                        <p class="event-description">Expert-led tour of Wall Street's iconic landmarks, trading floors, and investment insights. Perfect for business enthusiasts!</p>
+                        <a href="#" class="btn btn-primary">RSVP</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-icon-circle">🍹</div>
+                        <span class="event-tag">Social</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title">Brooklyn Rooftop Happy Hour</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 July 16, 2025 • 6:00 PM</div>
+                            <div class="event-meta-item">📍 Williamsburg Rooftop Bar</div>
+                        </div>
+                        <p class="event-description">Network and unwind on a trendy Brooklyn rooftop with drinks, food, and skyline views. Industry professionals attending!</p>
+                        <a href="#" class="btn btn-primary">RSVP</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-icon-circle">🎭</div>
+                        <span class="event-tag">Cultural</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title">Broadway Show Night</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 July 19, 2025 • 8:00 PM</div>
+                            <div class="event-meta-item">📍 Richard Rodgers Theatre</div>
+                        </div>
+                        <p class="event-description">Experience world-class theater! Group tickets to a hit Broadway show. Dinner at a nearby restaurant before the show.</p>
+                        <a href="#" class="btn btn-primary">RSVP</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-icon-circle">🎨</div>
+                        <span class="event-tag">Cultural</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title">MoMA Visit</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 July 23, 2025 • 3:00 PM</div>
+                            <div class="event-meta-item">📍 Museum of Modern Art, Midtown</div>
+                        </div>
+                        <p class="event-description">Guided tour of the Museum of Modern Art with focus on contemporary art. Private curator discussion included.</p>
+                        <a href="#" class="btn btn-primary">RSVP</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-icon-circle">🤝</div>
+                        <span class="event-tag">Networking</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title">Networking with NYC Alumni</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 July 25, 2025 • 5:30 PM</div>
+                            <div class="event-meta-item">📍 Corporate Club, Upper East Side</div>
+                        </div>
+                        <p class="event-description">Connect with Hult alumni working at top NYC firms. Learn career paths and get mentorship advice over cocktails.</p>
+                        <a href="#" class="btn btn-primary">RSVP</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-icon-circle">⚾</div>
+                        <span class="event-tag">Social</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title">Yankees Game Night</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 July 29, 2025 • 7:00 PM</div>
+                            <div class="event-meta-item">📍 Yankee Stadium, The Bronx</div>
+                        </div>
+                        <p class="event-description">Cheer for the Yankees from premium seats! Group outing with pre-game team meal and post-game celebration planned.</p>
+                        <a href="#" class="btn btn-primary">RSVP</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-icon-circle">🚶</div>
+                        <span class="event-tag">Cultural</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title">High Line & Chelsea Market</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 Aug 2, 2025 • 10:00 AM</div>
+                            <div class="event-meta-item">📍 The High Line, Chelsea</div>
+                        </div>
+                        <p class="event-description">Stroll the famous elevated park and explore Chelsea Market's artisan food vendors. Brunch and shopping included!</p>
+                        <a href="#" class="btn btn-primary">RSVP</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-icon-circle">🎉</div>
+                        <span class="event-tag">Social</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title">Farewell Celebration Dinner</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 Aug 8, 2025 • 7:00 PM</div>
+                            <div class="event-meta-item">📍 Michelin-Starred Restaurant</div>
+                        </div>
+                        <p class="event-description">Celebrate the end of an incredible 4 weeks! Awards, speeches, and gourmet dinner with faculty and classmates.</p>
+                        <a href="#" class="btn btn-primary">RSVP</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <div class="section-header">
+                <p class="eyebrow">Memories</p>
+                <h2 class="section-title">Photo Gallery</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="week1">Week 1</button>
+                <button class="filter-btn" data-filter="week2">Week 2</button>
+                <button class="filter-btn" data-filter="week3">Week 3</button>
+                <button class="filter-btn" data-filter="week4">Week 4</button>
+            </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" data-week="week1" data-caption="Welcome Orientation">
+                    <img src="https://picsum.photos/seed/nyc_orientation/600/400" alt="Welcome Orientation">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Welcome Orientation</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week1" data-caption="First Day at Campus">
+                    <img src="https://picsum.photos/seed/nyc_campus/600/400" alt="First Day at Campus">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">First Day at Campus</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week1" data-caption="Classroom Moments">
+                    <img src="https://picsum.photos/seed/nyc_classroom/600/400" alt="Classroom Moments">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Classroom Moments</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week1" data-caption="Welcome Dinner">
+                    <img src="https://picsum.photos/seed/nyc_dinner1/600/400" alt="Welcome Dinner">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Welcome Dinner</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week2" data-caption="Central Park Run">
+                    <img src="https://picsum.photos/seed/nyc_park/600/400" alt="Central Park Run">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Central Park Run</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week2" data-caption="Wall Street Tour">
+                    <img src="https://picsum.photos/seed/nyc_wallst/600/400" alt="Wall Street Tour">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Wall Street Tour</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week2" data-caption="Brooklyn Skyline">
+                    <img src="https://picsum.photos/seed/nyc_brooklyn/600/400" alt="Brooklyn Skyline">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Brooklyn Skyline</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week2" data-caption="Group Lunch">
+                    <img src="https://picsum.photos/seed/nyc_lunch/600/400" alt="Group Lunch">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Group Lunch</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week3" data-caption="Broadway Show">
+                    <img src="https://picsum.photos/seed/nyc_broadway/600/400" alt="Broadway Show">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Broadway Show</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week3" data-caption="MoMA Visit">
+                    <img src="https://picsum.photos/seed/nyc_moma/600/400" alt="MoMA Visit">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">MoMA Visit</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week3" data-caption="Networking Event">
+                    <img src="https://picsum.photos/seed/nyc_network/600/400" alt="Networking Event">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Networking Event</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week4" data-caption="Capstone Presentations">
+                    <img src="https://picsum.photos/seed/nyc_capstone/600/400" alt="Capstone Presentations">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Capstone Presentations</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week4" data-caption="Farewell Celebration">
+                    <img src="https://picsum.photos/seed/nyc_farewell/600/400" alt="Farewell Celebration">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Farewell Celebration</div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-week="week4" data-caption="Group Photo">
+                    <img src="https://picsum.photos/seed/nyc_group/600/400" alt="Group Photo">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">Group Photo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <div class="lightbox-close" id="lightboxClose">&times;</div>
+            <img id="lightboxImage" class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <!-- INFO SECTION -->
+    <section id="info" class="section">
+        <div class="container">
+            <div class="section-header">
+                <p class="eyebrow">About Us</p>
+                <h2 class="section-title">NYC Campus Experience</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="stats-box">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number">42</div>
+                    <div class="stat-label">Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Weeks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Courses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🗽</div>
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">City</div>
+                </div>
+            </div>
+
+            <div class="info-container">
+                <div class="info-text">
+                    <p>Welcome to Hult International Business School's New York City campus! This is an exclusive 4-week intensive business program designed for globally-minded students seeking to immerse themselves in one of the world's most dynamic cities.</p>
+                    <p>Our curriculum combines rigorous academic learning with real-world business exposure. You'll study cutting-edge topics in innovation, entrepreneurship, and leadership while networking with industry leaders and fellow ambitious students.</p>
+                    <p>Beyond the classroom, New York City is your learning playground. From Wall Street finance to Brooklyn's startup scene, from Broadway culture to world-class museums, you'll experience the full spectrum of what makes NYC the global business capital.</p>
+                    <p>This hub serves as your central resource for schedules, events, photos, and essential campus information. Stay connected, stay informed, and make the most of your time in New York.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-title">Quick Reference</div>
+                    <div class="info-item">
+                        <div class="info-label">Campus Address</div>
+                        <div class="info-value">Hult NYC Campus<br>535 5th Avenue<br>New York, NY 10017</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Campus Phone</div>
+                        <div class="info-value">+1 (212) 555-0123</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Program Dates</div>
+                        <div class="info-value">July 7 – August 8, 2025</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Housing Coordinator</div>
+                        <div class="info-value">housing@hultnyc.edu<br>(212) 555-0124</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Emergency Number</div>
+                        <div class="info-value">+1 (212) 555-0911</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Program Director</div>
+                        <div class="info-value">Lisa Anderson<br>l.anderson@hult.edu</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMIN SECTION -->
+    <section id="admin" class="section">
+        <div class="container">
+            <div class="section-header">
+                <p class="eyebrow">Administrative</p>
+                <h2 class="section-title">Admin Panel</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="admin-password-section" id="adminPasswordSection">
+                <h3 style="color: var(--navy); margin-bottom: 1.5rem; font-size: 1.2rem;">Admin Access Required</h3>
+                <div class="password-input-group">
+                    <input type="password" id="adminPassword" placeholder="Enter admin password">
+                    <button class="btn btn-primary" onclick="unlockAdmin()">Unlock</button>
+                </div>
+                <p style="color: #666; font-size: 0.9rem;">Enter the administrator password to access editing tools</p>
+            </div>
+
+            <div id="adminContent" class="hidden">
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 2rem;">
+                    <button class="btn-logout" onclick="lockAdmin()">Logout</button>
+                </div>
+
+                <div class="admin-panel">
+                    <div class="admin-form">
+                        <h3 class="admin-form-title">Add New Event</h3>
+                        <form id="eventForm" onsubmit="addEvent(event)">
+                            <div class="form-group">
+                                <label for="eventTitle">Event Title</label>
+                                <input type="text" id="eventTitle" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDate">Date</label>
+                                <input type="date" id="eventDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventTime">Time</label>
+                                <input type="time" id="eventTime" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventLocation">Location</label>
+                                <input type="text" id="eventLocation" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDescription">Description</label>
+                                <textarea id="eventDescription" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventType">Event Type</label>
+                                <select id="eventType" required>
+                                    <option value="Social">Social</option>
+                                    <option value="Cultural">Cultural</option>
+                                    <option value="Networking">Networking</option>
+                                    <option value="Academic">Academic</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Add Event</button>
+                        </form>
+                    </div>
+
+                    <div class="admin-list">
+                        <h3 class="admin-list-title">Added Events</h3>
+                        <div id="adminEventsList"></div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px var(--dark-shadow);">
+                    <h3 style="color: var(--navy); margin-bottom: 1.5rem; font-size: 1.2rem;">Upload Photo</h3>
+                    <form id="photoForm" onsubmit="addPhoto(event)">
+                        <div class="form-group">
+                            <label for="photoFile">Photo File</label>
+                            <input type="file" id="photoFile" accept="image/*" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="photoCaption">Photo Caption</label>
+                            <input type="text" id="photoCaption" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="photoWeek">Week Tag</label>
+                            <select id="photoWeek" required>
+                                <option value="week1">Week 1</option>
+                                <option value="week2">Week 2</option>
+                                <option value="week3">Week 3</option>
+                                <option value="week4">Week 4</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-secondary" style="width: 100%;">Upload Photo</button>
+                    </form>
+                </div>
+
+                <div style="margin-top: 3rem; background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px var(--dark-shadow); text-align: center;">
+                    <h3 style="color: var(--navy); margin-bottom: 1rem; font-size: 1.2rem;">Edit Schedule</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">To edit course schedule, contact the program director at <a href="mailto:l.anderson@hult.edu" style="color: var(--magenta); font-weight: 600;">l.anderson@hult.edu</a></p>
+                    <a href="mailto:l.anderson@hult.edu" class="btn btn-secondary">Email Director</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">© 2025 Hult International Business School. New York Campus.</p>
+            <p class="footer-text">
+                <a href="mailto:info@hult.edu" class="footer-link">info@hult.edu</a> |
+                <a href="tel:+12125550123" class="footer-link">+1 (212) 555-0123</a>
+            </p>
+            <p style="color: var(--gold); font-weight: 600; margin-top: 1rem;">Build Your Global Future</p>
+        </div>
+    </footer>
+
+    <script>
+        // NAVIGATION SCROLL SPY
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+
+        // HAMBURGER MENU
+        const hamburger = document.getElementById('hamburger');
+        const navLinksMenu = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinksMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinksMenu.classList.remove('active');
+            });
+        });
+
+        // GALLERY LIGHTBOX
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                const caption = item.getAttribute('data-caption');
+                lightboxImage.src = img.src;
+                lightboxCaption.textContent = caption;
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // GALLERY FILTERS
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryGrid = document.getElementById('galleryGrid');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+                const items = galleryGrid.querySelectorAll('.gallery-item');
+
+                items.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-week') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // ADMIN PANEL
+        const ADMIN_PASSWORD = 'HultNYC2025';
+        const adminPasswordSection = document.getElementById('adminPasswordSection');
+        const adminContent = document.getElementById('adminContent');
+        const adminPassword = document.getElementById('adminPassword');
+
+        function unlockAdmin() {
+            if (adminPassword.value === ADMIN_PASSWORD) {
+                adminPasswordSection.classList.add('hidden');
+                adminContent.classList.remove('hidden');
+                loadAdminData();
+                showToast('Admin panel unlocked!', 'success');
+            } else {
+                showToast('Incorrect password', 'error');
+                adminPassword.value = '';
+            }
+        }
+
+        function lockAdmin() {
+            adminPasswordSection.classList.remove('hidden');
+            adminContent.classList.add('hidden');
+            adminPassword.value = '';
+            showToast('Admin session closed', 'info');
+        }
+
+        adminPassword.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') unlockAdmin();
+        });
+
+        // ADD EVENT FORM
+        function addEvent(e) {
+            e.preventDefault();
+
+            const event = {
+                id: Date.now(),
+                title: document.getElementById('eventTitle').value,
+                date: document.getElementById('eventDate').value,
+                time: document.getElementById('eventTime').value,
+                location: document.getElementById('eventLocation').value,
+                description: document.getElementById('eventDescription').value,
+                type: document.getElementById('eventType').value
+            };
+
+            let events = JSON.parse(localStorage.getItem('customEvents')) || [];
+            events.push(event);
+            localStorage.setItem('customEvents', JSON.stringify(events));
+
+            document.getElementById('eventForm').reset();
+            loadAdminData();
+            renderEvents();
+            showToast('Event added successfully!', 'success');
+        }
+
+        // ADD PHOTO FORM
+        function addPhoto(e) {
+            e.preventDefault();
+
+            const fileInput = document.getElementById('photoFile');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const photo = {
+                        id: Date.now(),
+                        src: event.target.result,
+                        caption: document.getElementById('photoCaption').value,
+                        week: document.getElementById('photoWeek').value
+                    };
+
+                    let photos = JSON.parse(localStorage.getItem('customPhotos')) || [];
+                    photos.push(photo);
+                    localStorage.setItem('customPhotos', JSON.stringify(photos));
+
+                    document.getElementById('photoForm').reset();
+                    renderGallery();
+                    showToast('Photo uploaded successfully!', 'success');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // LOAD ADMIN DATA
+        function loadAdminData() {
+            const events = JSON.parse(localStorage.getItem('customEvents')) || [];
+            const adminEventsList = document.getElementById('adminEventsList');
+            adminEventsList.innerHTML = '';
+
+            if (events.length === 0) {
+                adminEventsList.innerHTML = '<p style="color: #999; text-align: center; padding: 2rem;">No custom events added yet</p>';
+                return;
+            }
+
+            events.forEach(event => {
+                const eventEl = document.createElement('div');
+                eventEl.className = 'admin-item';
+                eventEl.innerHTML = `
+                    <div class="admin-item-info">
+                        <div class="admin-item-title">${event.title}</div>
+                        <div class="admin-item-detail">${event.date} at ${event.time}</div>
+                        <div class="admin-item-detail">${event.location}</div>
+                    </div>
+                    <button class="btn-delete" onclick="deleteEvent(${event.id})">Delete</button>
+                `;
+                adminEventsList.appendChild(eventEl);
+            });
+        }
+
+        // DELETE EVENT
+        function deleteEvent(id) {
+            let events = JSON.parse(localStorage.getItem('customEvents')) || [];
+            events = events.filter(e => e.id !== id);
+            localStorage.setItem('customEvents', JSON.stringify(events));
+            loadAdminData();
+            renderEvents();
+            showToast('Event deleted', 'info');
+        }
+
+        // RENDER CUSTOM EVENTS
+        function renderEvents() {
+            const events = JSON.parse(localStorage.getItem('customEvents')) || [];
+            const eventsGrid = document.getElementById('eventsGrid');
+
+            events.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.className = 'event-card';
+                eventCard.innerHTML = `
+                    <div class="event-header">
+                        <div class="event-icon-circle">📌</div>
+                        <span class="event-tag">${event.type}</span>
+                    </div>
+                    <div class="event-body">
+                        <h3 class="event-title">${event.title}</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 ${event.date} • ${event.time}</div>
+                            <div class="event-meta-item">📍 ${event.location}</div>
+                        </div>
+                        <p class="event-description">${event.description}</p>
+                        <a href="#" class="btn btn-primary">RSVP</a>
+                    </div>
+                `;
+                eventsGrid.appendChild(eventCard);
+            });
+        }
+
+        // RENDER CUSTOM PHOTOS
+        function renderGallery() {
+            const photos = JSON.parse(localStorage.getItem('customPhotos')) || [];
+            const galleryGrid = document.getElementById('galleryGrid');
+
+            photos.forEach(photo => {
+                const photoEl = document.createElement('div');
+                photoEl.className = 'gallery-item';
+                photoEl.setAttribute('data-week', photo.week);
+                photoEl.setAttribute('data-caption', photo.caption);
+                photoEl.innerHTML = `
+                    <img src="${photo.src}" alt="${photo.caption}">
+                    <div class="gallery-caption">
+                        <div class="gallery-caption-title">${photo.caption}</div>
+                    </div>
+                `;
+
+                photoEl.addEventListener('click', () => {
+                    lightboxImage.src = photo.src;
+                    lightboxCaption.textContent = photo.caption;
+                    lightbox.classList.add('active');
+                });
+
+                galleryGrid.appendChild(photoEl);
+            });
+        }
+
+        // TOAST NOTIFICATIONS
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+
+            if (type === 'success') {
+                toast.style.background = 'var(--teal)';
+            } else if (type === 'error') {
+                toast.style.background = 'var(--magenta)';
+            }
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideInRight 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // INIT
+        window.addEventListener('load', () => {
+            renderEvents();
+            renderGallery();
+        });
+    </script>
+</body>
+</html>
