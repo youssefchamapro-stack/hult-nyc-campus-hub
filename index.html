@@ -34,6 +34,8 @@
         body {
             font-family: 'EFCircular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--light);
+            background-image: radial-gradient(circle, rgba(10,31,92,0.045) 1px, transparent 1px);
+            background-size: 28px 28px;
             color: var(--navy);
             line-height: 1.6;
         }
@@ -124,6 +126,42 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+
+        /* NYC SKYLINE OVERLAY */
+        .skyline-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 55%;
+            z-index: 1;
+            opacity: 0.07;
+            pointer-events: none;
+        }
+
+        .skyline-overlay svg {
+            width: 100%;
+            height: 100%;
+            fill: white;
+        }
+
+        /* STATUE OF LIBERTY SILHOUETTE */
+        .liberty-silhouette {
+            position: absolute;
+            right: 5%;
+            bottom: 60px;
+            width: 120px;
+            height: 180px;
+            z-index: 1;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .liberty-silhouette svg {
+            fill: white;
+            width: 100%;
+            height: 100%;
         }
 
         .blob {
@@ -1083,6 +1121,119 @@
     <section id="home" class="hero">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
+
+        <!-- NYC Skyline silhouette -->
+        <div class="skyline-overlay">
+            <svg viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+                <!-- Brooklyn Bridge cables -->
+                <path d="M0,400 L0,320 L60,280 L80,240 L100,280 L160,320 L180,300 L200,260 L220,300 L280,320 L280,400Z"/>
+                <!-- Low buildings left -->
+                <rect x="0" y="310" width="30" height="90"/>
+                <rect x="32" y="290" width="25" height="110"/>
+                <rect x="59" y="305" width="20" height="95"/>
+                <rect x="81" y="270" width="18" height="130"/>
+                <rect x="101" y="295" width="22" height="105"/>
+                <!-- Empire State Building -->
+                <rect x="130" y="120" width="40" height="280"/>
+                <rect x="138" y="90" width="24" height="50"/>
+                <rect x="144" y="60" width="12" height="40"/>
+                <rect x="148" y="30" width="4" height="40"/>
+                <!-- Buildings around ESB -->
+                <rect x="172" y="220" width="35" height="180"/>
+                <rect x="172" y="200" width="35" height="30"/>
+                <rect x="209" y="240" width="28" height="160"/>
+                <rect x="239" y="260" width="22" height="140"/>
+                <!-- Chrysler Building -->
+                <rect x="263" y="150" width="38" height="250"/>
+                <rect x="270" y="120" width="24" height="40"/>
+                <rect x="275" y="95" width="14" height="32"/>
+                <rect x="279" y="75" width="6" height="25"/>
+                <!-- More midtown -->
+                <rect x="303" y="200" width="40" height="200"/>
+                <rect x="345" y="230" width="32" height="170"/>
+                <rect x="379" y="210" width="45" height="190"/>
+                <rect x="426" y="250" width="28" height="150"/>
+                <!-- One WTC -->
+                <polygon points="455,50 470,50 490,400 435,400"/>
+                <rect x="455" y="40" width="15" height="20"/>
+                <!-- More downtown -->
+                <rect x="492" y="170" width="42" height="230"/>
+                <rect x="492" y="155" width="42" height="25"/>
+                <rect x="536" y="190" width="35" height="210"/>
+                <rect x="573" y="210" width="38" height="190"/>
+                <rect x="613" y="230" width="30" height="170"/>
+                <!-- Brooklyn buildings right -->
+                <rect x="645" y="270" width="28" height="130"/>
+                <rect x="675" y="285" width="22" height="115"/>
+                <rect x="699" y="260" width="35" height="140"/>
+                <rect x="736" y="275" width="25" height="125"/>
+                <rect x="763" y="290" width="30" height="110"/>
+                <rect x="795" y="265" width="40" height="135"/>
+                <rect x="837" y="280" width="28" height="120"/>
+                <rect x="867" y="295" width="22" height="105"/>
+                <rect x="891" y="270" width="35" height="130"/>
+                <!-- Water towers on roofs -->
+                <circle cx="155" cy="215" r="6"/>
+                <rect x="152" y="215" width="6" height="10"/>
+                <circle cx="310" cy="195" r="5"/>
+                <rect x="307" y="195" width="6" height="8"/>
+                <circle cx="500" cy="165" r="5"/>
+                <rect x="497" y="165" width="6" height="8"/>
+                <!-- Far right buildings -->
+                <rect x="928" y="300" width="25" height="100"/>
+                <rect x="955" y="285" width="30" height="115"/>
+                <rect x="987" y="270" width="22" height="130"/>
+                <rect x="1011" y="290" width="28" height="110"/>
+                <rect x="1041" y="260" width="35" height="140"/>
+                <rect x="1078" y="275" width="25" height="125"/>
+                <rect x="1105" y="295" width="20" height="105"/>
+                <rect x="1127" y="280" width="30" height="120"/>
+                <rect x="1159" y="265" width="38" height="135"/>
+                <rect x="1199" y="285" width="25" height="115"/>
+                <rect x="1226" y="300" width="22" height="100"/>
+                <rect x="1250" y="270" width="35" height="130"/>
+                <rect x="1287" y="285" width="28" height="115"/>
+                <rect x="1317" y="295" width="22" height="105"/>
+                <rect x="1341" y="260" width="40" height="140"/>
+                <rect x="1383" y="280" width="30" height="120"/>
+                <rect x="1415" y="300" width="25" height="100"/>
+                <!-- Ground fill -->
+                <rect x="0" y="395" width="1440" height="10"/>
+            </svg>
+        </div>
+
+        <!-- Statue of Liberty silhouette -->
+        <div class="liberty-silhouette">
+            <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Torch arm -->
+                <rect x="82" y="20" width="5" height="30"/>
+                <ellipse cx="84" cy="18" rx="6" ry="9"/>
+                <!-- Head with crown spikes -->
+                <polygon points="58,55 60,40 62,55"/>
+                <polygon points="64,53 68,38 70,53"/>
+                <polygon points="70,55 76,42 78,56"/>
+                <polygon points="52,55 48,40 54,55"/>
+                <polygon points="46,57 40,44 48,58"/>
+                <!-- Head -->
+                <ellipse cx="59" cy="65" rx="14" ry="13"/>
+                <!-- Body/robe -->
+                <path d="M45,78 L35,160 L83,160 L73,78 Z"/>
+                <!-- Right arm holding torch -->
+                <path d="M73,85 L90,60 L88,58 L70,83Z"/>
+                <!-- Left arm with tablet -->
+                <path d="M45,90 L28,110 L32,114 L48,93Z"/>
+                <rect x="24" y="108" width="12" height="18" rx="2"/>
+                <!-- Robe folds -->
+                <line x1="50" y1="80" x2="45" y2="155"/>
+                <line x1="58" y1="78" x2="56" y2="158"/>
+                <line x1="66" y1="80" x2="70" y2="155"/>
+                <!-- Pedestal -->
+                <rect x="38" y="160" width="46" height="15"/>
+                <rect x="33" y="175" width="56" height="10"/>
+                <rect x="28" y="185" width="66" height="15"/>
+            </svg>
+        </div>
+
         <div class="hero-content">
             <h1 class="hero-title">New York Campus Hub <span class="gold">2025</span></h1>
             <p class="hero-subtitle">Your central place for schedule, events, photos & everything NYC</p>
