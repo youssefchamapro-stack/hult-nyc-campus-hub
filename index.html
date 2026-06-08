@@ -673,6 +673,53 @@
             flex-shrink: 0;
         }
 
+        /* CAL DAY DETAIL POPUP */
+        .cal-day-popup {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 9000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .cal-day-popup.active { display: flex; }
+        .cal-day-popup-box {
+            background: #0d2a5a;
+            border: 1px solid rgba(200,168,75,0.4);
+            border-radius: 16px;
+            padding: 1.5rem;
+            max-width: 340px;
+            width: 100%;
+            color: white;
+        }
+        .cal-day-popup-date {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+        }
+        .cal-day-popup-entry {
+            font-size: 0.88rem;
+            padding: 0.5rem 0.7rem;
+            border-radius: 8px;
+            margin-bottom: 0.4rem;
+            line-height: 1.4;
+        }
+        .cal-day-popup-close {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.7rem;
+            background: var(--magenta);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
         /* GALLERY SECTION */
         .gallery-filters {
             display: flex;
@@ -1551,17 +1598,12 @@
             .eyebrow { font-size: 0.7rem; }
             .container { padding: 0 0.9rem; }
 
-            /* CALENDAR — single letter day headers on tiny screens */
+            /* CALENDAR — dot indicators on small screens */
             .cal-day-header { font-size: 0.6rem; letter-spacing: 0; }
-            .cal-day { min-height: 50px; }
-            .cal-event-pill { display: none; } /* too small — just show dots */
-            .cal-day.has-event::after {
-                content: '•';
-                color: var(--magenta);
-                font-size: 0.8rem;
-                display: block;
-                text-align: center;
-            }
+            .cal-day { min-height: 52px; cursor: pointer; }
+            .cal-event-pill { display: none; }
+            .cal-dot-row { display: flex; gap: 2px; flex-wrap: wrap; justify-content: center; margin-top: 3px; }
+            .cal-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 
             /* GALLERY */
             .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
@@ -2054,6 +2096,15 @@
             </div>
         </div>
     </section>
+
+    <!-- CAL DAY DETAIL POPUP -->
+    <div class="cal-day-popup" id="calDayPopup" onclick="if(event.target===this)closeCalPopup()">
+        <div class="cal-day-popup-box">
+            <div class="cal-day-popup-date" id="calPopupDate"></div>
+            <div id="calPopupEntries"></div>
+            <button class="cal-day-popup-close" onclick="closeCalPopup()">Close</button>
+        </div>
+    </div>
 
     <!-- GALLERY SECTION -->
     <section id="gallery" class="section">
@@ -3074,6 +3125,12 @@
             }
 
             // Days
+            const dotColors = { class: '#2dd4bf', event: '#f472b6', holiday: '#fbbf24', special: 'rgba(255,255,255,0.6)' };
+            const monthNames = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
+            // Store entries per day for popup use
+            window._calDayEntries = window._calDayEntries || {};
+            window._calDayEntries[month] = {};
+
             for (let d = 1; d <= daysInMonth; d++) {
                 const key = `${year}-${monthNum}-${d}`;
                 const entries = calData[key] || [];
@@ -3081,22 +3138,35 @@
                 const isOpening = key === '2025-6-22';
                 const isClosing = key === '2025-7-19';
 
+                window._calDayEntries[month][d] = { entries, monthName: monthNames[monthNum], day: d, year };
+
                 let cls = 'cal-day';
                 if (isOpening) cls += ' opening';
                 if (isClosing) cls += ' closing';
                 if (isToday) cls += ' today';
                 if (entries.length > 0) cls += ' has-event';
 
-                html += `<div class="${cls}">`;
+                const onclickAttr = entries.length > 0 ? `onclick="openCalPopup('${month}',${d})"` : '';
+                html += `<div class="${cls}" ${onclickAttr}>`;
                 html += `<div class="cal-day-num">${d}</div>`;
 
+                // Desktop: show pills as before
                 entries.slice(0, 3).forEach(e => {
                     const pillClass = e.type === 'class' ? 'cal-pill-class' : e.type === 'event' ? 'cal-pill-event' : e.type === 'holiday' ? 'cal-pill-holiday' : 'cal-pill-special';
                     html += `<span class="cal-event-pill ${pillClass}" title="${e.text}">${e.text}</span>`;
                 });
-
                 if (entries.length > 3) {
                     html += `<span style="font-size:0.65rem;color:rgba(255,255,255,0.4);">+${entries.length - 3} more</span>`;
+                }
+
+                // Mobile: show colored dots
+                if (entries.length > 0) {
+                    html += `<div class="cal-dot-row">`;
+                    entries.forEach(e => {
+                        const color = dotColors[e.type] || dotColors.special;
+                        html += `<div class="cal-dot" style="background:${color};" title="${e.text}"></div>`;
+                    });
+                    html += `</div>`;
                 }
 
                 html += `</div>`;
@@ -3104,6 +3174,21 @@
 
             html += `</div>`;
             container.innerHTML = html;
+        }
+
+        function openCalPopup(month, day) {
+            const data = (window._calDayEntries[month] || {})[day];
+            if (!data || !data.entries.length) return;
+            const pillBg = { class: 'rgba(13,122,107,0.5)', event: 'rgba(192,0,106,0.5)', holiday: 'rgba(200,168,75,0.4)', special: 'rgba(255,255,255,0.1)' };
+            const pillColor = { class: '#a8f0e8', event: '#ffb3d9', holiday: '#ffe0a0', special: 'white' };
+            document.getElementById('calPopupDate').textContent = `${data.monthName} ${data.day}, ${data.year}`;
+            document.getElementById('calPopupEntries').innerHTML = data.entries.map(e =>
+                `<div class="cal-day-popup-entry" style="background:${pillBg[e.type]||pillBg.special};color:${pillColor[e.type]||'white'}">${e.text}</div>`
+            ).join('');
+            document.getElementById('calDayPopup').classList.add('active');
+        }
+        function closeCalPopup() {
+            document.getElementById('calDayPopup').classList.remove('active');
         }
 
         // ── UNIVERSAL EDITABLE TEXT SYSTEM ──────────────────────────────
