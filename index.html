@@ -2506,20 +2506,48 @@
         }
 
         // LOAD PHOTOS FROM CLOUDINARY
+        const GALLERY_STORAGE_KEY = 'hultNycGallery';
+
+        function savePhotoToStorage(photo) {
+            const stored = JSON.parse(localStorage.getItem(GALLERY_STORAGE_KEY) || '[]');
+            if (!stored.find(p => p.public_id === photo.public_id)) {
+                stored.unshift(photo);
+                localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(stored));
+            }
+        }
+
+        function getStoredPhotos() {
+            return JSON.parse(localStorage.getItem(GALLERY_STORAGE_KEY) || '[]');
+        }
+
         async function loadGallery() {
+            // Start with locally stored photos so gallery shows immediately
+            const stored = getStoredPhotos();
+            allPhotos = stored;
+            renderGallery();
+
+            // Then try to fetch from Cloudinary and merge
             try {
                 const res = await fetch(CLOUDINARY_LIST_URL);
-                if (!res.ok) throw new Error('No photos yet');
+                if (!res.ok) throw new Error('list unavailable');
                 const data = await res.json();
-                allPhotos = (data.resources || []).map(r => ({
+                const remote = (data.resources || []).map(r => ({
                     public_id: r.public_id,
                     secure_url: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${r.public_id}`,
                     caption: r.context?.custom?.caption || r.public_id.split('/').pop().replace(/_/g, ' '),
                     week: r.context?.custom?.week || 'all',
                     created_at: r.created_at
-                })).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                }));
+                // Merge: remote is source of truth, fill gaps with stored
+                const merged = [...remote];
+                stored.forEach(p => {
+                    if (!merged.find(r => r.public_id === p.public_id)) merged.push(p);
+                });
+                allPhotos = merged.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                // Persist any new remote photos locally for other users
+                allPhotos.forEach(savePhotoToStorage);
             } catch (e) {
-                allPhotos = [];
+                // Keep stored photos as fallback
             }
             renderGallery();
         }
@@ -2551,13 +2579,15 @@
                     const res = await fetch(CLOUDINARY_UPLOAD_URL, { method: 'POST', body: formData });
                     const data = await res.json();
                     if (data.secure_url) {
-                        allPhotos.unshift({
+                        const photo = {
                             public_id: data.public_id,
                             secure_url: data.secure_url,
                             caption: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
                             week: 'all',
                             created_at: new Date().toISOString()
-                        });
+                        };
+                        allPhotos.unshift(photo);
+                        savePhotoToStorage(photo);
                     }
                 } catch (err) {
                     console.error('Upload failed for', file.name, err);
