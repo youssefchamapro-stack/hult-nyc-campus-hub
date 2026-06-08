@@ -965,6 +965,250 @@
             font-size: 1rem;
         }
 
+        /* ADMIN MODE BAR */
+        #adminModeBar {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background: var(--navy);
+            color: var(--gold);
+            padding: 0.6rem 2rem;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+        }
+
+        #adminModeBar.visible {
+            display: flex;
+        }
+
+        body.admin-mode nav {
+            top: 44px;
+        }
+
+        body.admin-mode .hero {
+            padding-top: 164px;
+        }
+
+        .admin-bar-btn {
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
+            margin-left: 0.7rem;
+        }
+
+        .admin-bar-btn:hover {
+            background: white;
+        }
+
+        .admin-bar-btn.logout-btn {
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .admin-bar-btn.logout-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        /* ADMIN MODE — EVENT CARD OVERLAYS */
+        .event-card {
+            position: relative;
+        }
+
+        .event-card-admin-bar {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(10,31,92,0.95), transparent);
+            padding: 1rem;
+            border-radius: 0 0 20px 20px;
+            gap: 0.5rem;
+            justify-content: flex-end;
+            z-index: 10;
+        }
+
+        body.admin-mode .event-card-admin-bar {
+            display: flex;
+        }
+
+        .card-edit-btn, .card-delete-btn {
+            padding: 0.3rem 0.8rem;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .card-edit-btn {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .card-edit-btn:hover {
+            background: white;
+        }
+
+        .card-delete-btn {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        .card-delete-btn:hover {
+            background: #ff0000;
+        }
+
+        /* ADMIN MODE — COURSE CARD OVERLAYS */
+        .course-card {
+            position: relative;
+        }
+
+        .course-card-edit-btn {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 0.3rem 0.8rem;
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s;
+        }
+
+        body.admin-mode .course-card-edit-btn {
+            display: block;
+        }
+
+        .course-card-edit-btn:hover {
+            background: white;
+        }
+
+        /* ADMIN MODE — EDITABLE TEXT */
+        body.admin-mode .hero-title,
+        body.admin-mode .hero-subtitle {
+            outline: 2px dashed rgba(200,168,75,0.6);
+            cursor: text;
+            border-radius: 4px;
+            padding: 2px 4px;
+        }
+
+        body.admin-mode .info-value {
+            outline: 2px dashed rgba(10,31,92,0.3);
+            cursor: text;
+            border-radius: 4px;
+            padding: 2px 4px;
+            position: relative;
+        }
+
+        body.admin-mode .info-value:hover {
+            outline-color: var(--magenta);
+        }
+
+        /* INLINE EDIT MODAL */
+        #inlineEditModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,31,92,0.7);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #inlineEditModal.open {
+            display: flex;
+        }
+
+        .inline-edit-box {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 540px;
+            width: 92%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+            animation: slideUp 0.25s ease;
+        }
+
+        .inline-edit-box h3 {
+            color: var(--navy);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--magenta);
+            padding-bottom: 0.8rem;
+        }
+
+        .inline-edit-box .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .inline-edit-box .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .inline-edit-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            justify-content: flex-end;
+        }
+
+        .inline-edit-actions button {
+            padding: 0.7rem 1.6rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-save-edit {
+            background: var(--navy);
+            color: white;
+        }
+
+        .btn-save-edit:hover {
+            background: var(--magenta);
+        }
+
+        .btn-cancel-edit {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .btn-cancel-edit:hover {
+            background: #e0e0e0;
+        }
+
         /* ADMIN SECTION */
         #admin {
             background: linear-gradient(135deg, rgba(10, 31, 92, 0.05), rgba(13, 122, 107, 0.05));
@@ -1296,6 +1540,88 @@
     </style>
 </head>
 <body>
+    <!-- ADMIN MODE BAR -->
+    <div id="adminModeBar">
+        <span>✏️ Admin Mode</span>
+        <div>
+            <button class="admin-bar-btn" onclick="openAddEventModal()">＋ Add Event</button>
+            <button class="admin-bar-btn logout-btn" onclick="lockAdmin()">Logout</button>
+        </div>
+    </div>
+
+    <!-- INLINE EDIT MODAL -->
+    <div id="inlineEditModal">
+        <div class="inline-edit-box">
+            <h3 id="inlineEditTitle">Edit Event</h3>
+            <div id="eventEditFields">
+                <div class="form-group">
+                    <label>Event Title</label>
+                    <input type="text" id="ieEventTitle" class="form-control" style="width:100%;padding:0.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;font-family:inherit;">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="ieEventDate" style="width:100%;padding:0.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;font-family:inherit;">
+                    </div>
+                    <div class="form-group">
+                        <label>Time</label>
+                        <input type="time" id="ieEventTime" style="width:100%;padding:0.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;font-family:inherit;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="ieEventLocation" style="width:100%;padding:0.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;font-family:inherit;">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="ieEventDescription" rows="3" style="width:100%;padding:0.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;font-family:inherit;resize:vertical;"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Event Type</label>
+                    <select id="ieEventType" style="width:100%;padding:0.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;font-family:inherit;">
+                        <option value="Social">Social</option>
+                        <option value="Cultural">Cultural</option>
+                        <option value="Networking">Networking</option>
+                        <option value="Academic">Academic</option>
+                        <option value="Opening Day">Opening Day</option>
+                        <option value="Closing Day">Closing Day</option>
+                        <option value="Holiday">Holiday</option>
+                        <option value="Must-See">Must-See</option>
+                        <option value="Speaker Panel">Speaker Panel</option>
+                    </select>
+                </div>
+            </div>
+            <div id="courseEditFields" style="display:none;">
+                <div class="form-group">
+                    <label>Course Name</label>
+                    <input type="text" id="ieCourseTitle" style="width:100%;padding:0.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;font-family:inherit;">
+                </div>
+                <div class="form-group">
+                    <label>Dates</label>
+                    <input type="text" id="ieCourseDates" style="width:100%;padding:0.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;font-family:inherit;">
+                </div>
+                <div class="form-group">
+                    <label>Description / Room</label>
+                    <input type="text" id="ieCourseDescription" style="width:100%;padding:0.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;font-family:inherit;">
+                </div>
+                <div class="form-group">
+                    <label>Classroom Label</label>
+                    <input type="text" id="ieCourseProf" style="width:100%;padding:0.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;font-family:inherit;">
+                </div>
+            </div>
+            <div id="infoEditFields" style="display:none;">
+                <div class="form-group">
+                    <label id="infoEditLabel" style="font-weight:700;color:var(--magenta);font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;">Field</label>
+                    <textarea id="ieInfoValue" rows="3" style="width:100%;padding:0.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;font-family:inherit;resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="inline-edit-actions">
+                <button class="btn-cancel-edit" onclick="closeInlineEditModal()">Cancel</button>
+                <button class="btn-save-edit" id="inlineEditSaveBtn" onclick="saveInlineEdit()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
     <!-- NAVIGATION -->
     <nav>
         <div class="nav-container">
@@ -1321,8 +1647,8 @@
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
 <div class="hero-content">
-            <h1 class="hero-title">New York Campus Hub <span class="gold">2025</span></h1>
-            <p class="hero-subtitle">Your central place for schedule, events, photos & everything NYC</p>
+            <h1 class="hero-title" id="heroTitle">New York Campus Hub <span class="gold">2025</span></h1>
+            <p class="hero-subtitle" id="heroSubtitle">Your central place for schedule, events, photos & everything NYC</p>
             <div class="pill-tags">
                 <span class="pill">✈ 42 Students</span>
                 <span class="pill">📅 Jun 22 – Jul 19, 2025</span>
@@ -1354,7 +1680,8 @@
             </div>
             <div class="schedule-grid">
                 <!-- Week of June 22 -->
-                <div class="course-card">
+                <div class="course-card" data-course-id="course-1">
+                    <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,var(--navy) 0%,#0d4a7a 100%);">Neuromarketing</div>
                     <div class="course-body">
                         <p class="course-dates">📅 Week of June 22 — Weekdays (Mon–Fri)</p>
@@ -1362,7 +1689,8 @@
                         <p class="course-professor">🟦 Classroom A</p>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-course-id="course-2">
+                    <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,var(--teal) 0%,#0a5a52 100%);">Venture Capital</div>
                     <div class="course-body">
                         <p class="course-dates">📅 Week of June 22 — Weekdays (Mon–Fri)</p>
@@ -1370,7 +1698,8 @@
                         <p class="course-professor">🟩 Classroom B</p>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-course-id="course-3">
+                    <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,var(--magenta) 0%,#8b0049 100%);">New Product Development</div>
                     <div class="course-body">
                         <p class="course-dates">📅 Week of June 22 — Weekend (Sat–Sun)</p>
@@ -1379,7 +1708,8 @@
                     </div>
                 </div>
                 <!-- Week of June 29 -->
-                <div class="course-card">
+                <div class="course-card" data-course-id="course-4">
+                    <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,var(--navy) 0%,#0d4a7a 100%);">Private Equity</div>
                     <div class="course-body">
                         <p class="course-dates">📅 Week of June 29 — Weekdays (Mon–Thu)</p>
@@ -1388,7 +1718,8 @@
                     </div>
                 </div>
                 <!-- Week of July 6 -->
-                <div class="course-card">
+                <div class="course-card" data-course-id="course-5">
+                    <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,var(--teal) 0%,#0a5a52 100%);">Business Analysis & Valuation</div>
                     <div class="course-body">
                         <p class="course-dates">📅 Weeks of Jul 6 & Jul 13 — Weekdays</p>
@@ -1396,7 +1727,8 @@
                         <p class="course-professor">🟦 Classroom A</p>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-course-id="course-6">
+                    <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,var(--magenta) 0%,#8b0049 100%);">Mergers & Acquisitions</div>
                     <div class="course-body">
                         <p class="course-dates">📅 Week of July 6 — Weekend (Sat–Sun)</p>
@@ -1404,7 +1736,8 @@
                         <p class="course-professor">🟦 Classroom A</p>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-course-id="course-7">
+                    <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,#6b2d8b 0%,#4a1a6b 100%);">Luxury Brand Management</div>
                     <div class="course-body">
                         <p class="course-dates">📅 Week of July 6 — Weekend (Sat–Sun)</p>
@@ -1413,7 +1746,8 @@
                     </div>
                 </div>
                 <!-- Week of July 13 -->
-                <div class="course-card">
+                <div class="course-card" data-course-id="course-8">
+                    <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,var(--gold) 0%,#a07a20 100%);color:var(--navy);">AI Trends in Finance</div>
                     <div class="course-body">
                         <p class="course-dates">📅 Week of July 13 — Weekend (Sat–Sun)</p>
@@ -1421,7 +1755,8 @@
                         <p class="course-professor">🟦 Classroom A</p>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-course-id="course-9">
+                    <button class="course-card-edit-btn" onclick="openCourseEdit(this.closest('.course-card'))">✏️ Edit</button>
                     <div class="course-header" style="background:linear-gradient(135deg,#c05000 0%,#8b3300 100%);">PG City Seminar</div>
                     <div class="course-body">
                         <p class="course-dates">📅 Week of July 13 — Weekdays (Mon–Fri)</p>
@@ -1444,7 +1779,7 @@
             <div class="events-grid" id="eventsGrid">
 
                 <!-- Opening Day / Happy Hour -->
-                <div class="event-card">
+                <div class="event-card" data-event-id="hc-1">
                     <div class="event-header">
                         <div class="event-icon-circle">🎉</div>
                         <span class="event-tag" style="background:var(--magenta);">Opening Day</span>
@@ -1458,10 +1793,14 @@
                         </div>
                         <p class="event-description">Kick off the program with a welcome happy hour for the whole cohort. First chance to meet your classmates!</p>
                     </div>
+                    <div class="event-card-admin-bar">
+                        <button class="card-edit-btn" onclick="openEventEdit(this.closest('.event-card'))">✏️ Edit</button>
+                        <button class="card-delete-btn" onclick="deleteEventCard(this.closest('.event-card'))">🗑 Delete</button>
+                    </div>
                 </div>
 
                 <!-- Doughnuttery -->
-                <div class="event-card">
+                <div class="event-card" data-event-id="hc-2">
                     <div class="event-header">
                         <div class="event-icon-circle">🍩</div>
                         <span class="event-tag">Social</span>
@@ -1475,10 +1814,14 @@
                         </div>
                         <p class="event-description">Sweet start to the weekend — grab fresh artisan doughnuts with fellow students at the iconic Doughnuttery.</p>
                     </div>
+                    <div class="event-card-admin-bar">
+                        <button class="card-edit-btn" onclick="openEventEdit(this.closest('.event-card'))">✏️ Edit</button>
+                        <button class="card-delete-btn" onclick="deleteEventCard(this.closest('.event-card'))">🗑 Delete</button>
+                    </div>
                 </div>
 
                 <!-- Cookies Surprise -->
-                <div class="event-card">
+                <div class="event-card" data-event-id="hc-3">
                     <div class="event-header">
                         <div class="event-icon-circle">🍪</div>
                         <span class="event-tag">Social</span>
@@ -1492,10 +1835,14 @@
                         </div>
                         <p class="event-description">A fun surprise treat event — come along and see what's in store!</p>
                     </div>
+                    <div class="event-card-admin-bar">
+                        <button class="card-edit-btn" onclick="openEventEdit(this.closest('.event-card'))">✏️ Edit</button>
+                        <button class="card-delete-btn" onclick="deleteEventCard(this.closest('.event-card'))">🗑 Delete</button>
+                    </div>
                 </div>
 
                 <!-- 4th of July Picnic -->
-                <div class="event-card">
+                <div class="event-card" data-event-id="hc-4">
                     <div class="event-header">
                         <div class="event-icon-circle">🇺🇸</div>
                         <span class="event-tag" style="background:var(--teal);">Holiday</span>
@@ -1509,10 +1856,14 @@
                         </div>
                         <p class="event-description">Celebrate America's Independence Day early with a themed picnic — sandwiches, good vibes, and some NYC fireworks planning!</p>
                     </div>
+                    <div class="event-card-admin-bar">
+                        <button class="card-edit-btn" onclick="openEventEdit(this.closest('.event-card'))">✏️ Edit</button>
+                        <button class="card-delete-btn" onclick="deleteEventCard(this.closest('.event-card'))">🗑 Delete</button>
+                    </div>
                 </div>
 
                 <!-- NY Bagel Social -->
-                <div class="event-card">
+                <div class="event-card" data-event-id="hc-5">
                     <div class="event-header">
                         <div class="event-icon-circle">🥯</div>
                         <span class="event-tag">Social</span>
@@ -1526,11 +1877,15 @@
                         </div>
                         <p class="event-description">No NYC experience is complete without a proper bagel! Join for a casual morning bagel social before class.</p>
                     </div>
+                    <div class="event-card-admin-bar">
+                        <button class="card-edit-btn" onclick="openEventEdit(this.closest('.event-card'))">✏️ Edit</button>
+                        <button class="card-delete-btn" onclick="deleteEventCard(this.closest('.event-card'))">🗑 Delete</button>
+                    </div>
                 </div>
 
                 <!-- Speaker & Alumni Panel — HIGHLIGHTED -->
-                <div class="event-card" style="border: 2px solid var(--magenta); position:relative;">
-                    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--magenta);color:white;padding:0.3rem 1rem;border-radius:20px;font-size:0.75rem;font-weight:700;letter-spacing:1px;white-space:nowrap;">⭐ FEATURED EVENT</div>
+                <div class="event-card" data-event-id="hc-6" style="border: 2px solid var(--magenta);">
+                    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--magenta);color:white;padding:0.3rem 1rem;border-radius:20px;font-size:0.75rem;font-weight:700;letter-spacing:1px;white-space:nowrap;z-index:5;">⭐ FEATURED EVENT</div>
                     <div class="event-header" style="background:linear-gradient(135deg,var(--magenta),#8b0049);">
                         <div class="event-icon-circle">🎤</div>
                         <span class="event-tag" style="background:white;color:var(--magenta);">Speaker Panel</span>
@@ -1544,10 +1899,14 @@
                         </div>
                         <p class="event-description">Speaker & Alumni Panel: Hear from industry leaders and Hult alumni on how to build a career and life in New York City — the world's business capital.</p>
                     </div>
+                    <div class="event-card-admin-bar">
+                        <button class="card-edit-btn" onclick="openEventEdit(this.closest('.event-card'))">✏️ Edit</button>
+                        <button class="card-delete-btn" onclick="deleteEventCard(this.closest('.event-card'))">🗑 Delete</button>
+                    </div>
                 </div>
 
                 <!-- Cupcakes Surprise -->
-                <div class="event-card">
+                <div class="event-card" data-event-id="hc-7">
                     <div class="event-header">
                         <div class="event-icon-circle">🧁</div>
                         <span class="event-tag">Social</span>
@@ -1561,10 +1920,14 @@
                         </div>
                         <p class="event-description">Another sweet surprise event — weekend treats to keep the energy going!</p>
                     </div>
+                    <div class="event-card-admin-bar">
+                        <button class="card-edit-btn" onclick="openEventEdit(this.closest('.event-card'))">✏️ Edit</button>
+                        <button class="card-delete-btn" onclick="deleteEventCard(this.closest('.event-card'))">🗑 Delete</button>
+                    </div>
                 </div>
 
                 <!-- Manhattanhenge Walk -->
-                <div class="event-card">
+                <div class="event-card" data-event-id="hc-8">
                     <div class="event-header">
                         <div class="event-icon-circle">🌇</div>
                         <span class="event-tag" style="background:var(--gold);color:var(--navy);">Must-See</span>
@@ -1578,10 +1941,14 @@
                         </div>
                         <p class="event-description">Witness the rare Manhattanhenge phenomenon — the setting sun perfectly aligns with Manhattan's street grid, framed by the Empire State Building. Unmissable NYC experience.</p>
                     </div>
+                    <div class="event-card-admin-bar">
+                        <button class="card-edit-btn" onclick="openEventEdit(this.closest('.event-card'))">✏️ Edit</button>
+                        <button class="card-delete-btn" onclick="deleteEventCard(this.closest('.event-card'))">🗑 Delete</button>
+                    </div>
                 </div>
 
                 <!-- Happy Hour Week 3 -->
-                <div class="event-card">
+                <div class="event-card" data-event-id="hc-9">
                     <div class="event-header">
                         <div class="event-icon-circle">🍹</div>
                         <span class="event-tag">Social</span>
@@ -1595,10 +1962,14 @@
                         </div>
                         <p class="event-description">Mid-program happy hour — a great time to reflect on the first two weeks and connect with classmates over drinks.</p>
                     </div>
+                    <div class="event-card-admin-bar">
+                        <button class="card-edit-btn" onclick="openEventEdit(this.closest('.event-card'))">✏️ Edit</button>
+                        <button class="card-delete-btn" onclick="deleteEventCard(this.closest('.event-card'))">🗑 Delete</button>
+                    </div>
                 </div>
 
                 <!-- Closing Day Wraps -->
-                <div class="event-card">
+                <div class="event-card" data-event-id="hc-10">
                     <div class="event-header">
                         <div class="event-icon-circle">🎊</div>
                         <span class="event-tag" style="background:var(--magenta);">Closing Day</span>
@@ -1611,6 +1982,10 @@
                             <div class="event-meta-item">👥 12 attendees</div>
                         </div>
                         <p class="event-description">Closing Day celebration — wrap up your New York rotation campus experience with good food, great memories, and new friends for life.</p>
+                    </div>
+                    <div class="event-card-admin-bar">
+                        <button class="card-edit-btn" onclick="openEventEdit(this.closest('.event-card'))">✏️ Edit</button>
+                        <button class="card-delete-btn" onclick="deleteEventCard(this.closest('.event-card'))">🗑 Delete</button>
                     </div>
                 </div>
 
@@ -1755,101 +2130,61 @@
                     <div class="info-card-title">Quick Reference</div>
                     <div class="info-item">
                         <div class="info-label">Campus Address</div>
-                        <div class="info-value">Hult NYC Campus<br>535 5th Avenue<br>New York, NY 10017</div>
+                        <div class="info-value" data-info-key="campus-address" onclick="openInfoEdit(this)">Hult NYC Campus<br>535 5th Avenue<br>New York, NY 10017</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Campus Phone</div>
-                        <div class="info-value">+1 (212) 555-0123</div>
+                        <div class="info-value" data-info-key="campus-phone" onclick="openInfoEdit(this)">+1 (212) 555-0123</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Program Dates</div>
-                        <div class="info-value">June 22 – July 19, 2025</div>
+                        <div class="info-value" data-info-key="program-dates" onclick="openInfoEdit(this)">June 22 – July 19, 2025</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Housing Coordinator</div>
-                        <div class="info-value">housing@hultnyc.edu<br>(212) 555-0124</div>
+                        <div class="info-value" data-info-key="housing-coordinator" onclick="openInfoEdit(this)">housing@hultnyc.edu<br>(212) 555-0124</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Emergency Number</div>
-                        <div class="info-value">+1 (212) 555-0911</div>
+                        <div class="info-value" data-info-key="emergency-number" onclick="openInfoEdit(this)">+1 (212) 555-0911</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Campus Director</div>
-                        <div class="info-value">Sara Abou Fakher Timani<br>Senior Assistant Dean</div>
+                        <div class="info-value" data-info-key="campus-director" onclick="openInfoEdit(this)">Sara Abou Fakher Timani<br>Senior Assistant Dean</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ADMIN PANEL (discreet, hidden by default) -->
+    <!-- ADMIN PANEL (discreet, hidden by default) — photo upload only -->
     <div id="admin" style="background:var(--navy);padding:0;">
-        <div id="adminContent" class="hidden" style="max-width:900px;margin:0 auto;padding:3rem 2rem;">
+        <div id="adminContent" class="hidden" style="max-width:600px;margin:0 auto;padding:3rem 2rem;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;">
-                <span style="color:white;font-weight:700;letter-spacing:1px;font-size:0.9rem;">ADMIN PANEL</span>
-                <button class="btn-logout" onclick="lockAdmin()">Logout</button>
+                <span style="color:white;font-weight:700;letter-spacing:1px;font-size:0.9rem;">📸 ADMIN — PHOTO UPLOAD</span>
             </div>
-            <div class="admin-panel">
-                <div class="admin-form">
-                    <h3 class="admin-form-title">Add New Event</h3>
-                    <form id="eventForm" onsubmit="addEvent(event)">
-                        <div class="form-group">
-                            <label for="eventTitle">Event Title</label>
-                            <input type="text" id="eventTitle" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="eventDate">Date</label>
-                            <input type="date" id="eventDate" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="eventTime">Time</label>
-                            <input type="time" id="eventTime" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="eventLocation">Location</label>
-                            <input type="text" id="eventLocation" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="eventDescription">Description</label>
-                            <textarea id="eventDescription" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="eventType">Event Type</label>
-                            <select id="eventType" required>
-                                <option value="Social">Social</option>
-                                <option value="Cultural">Cultural</option>
-                                <option value="Networking">Networking</option>
-                                <option value="Academic">Academic</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width:100%;">Add Event</button>
-                    </form>
-                </div>
-                <div class="admin-list">
-                    <h3 class="admin-list-title">Added Events</h3>
-                    <div id="adminEventsList"></div>
-                    <h3 class="admin-list-title" style="margin-top:2rem;">Upload Photo</h3>
-                    <form id="photoForm" onsubmit="addPhoto(event)">
-                        <div class="form-group">
-                            <label for="photoFile">Photo File</label>
-                            <input type="file" id="photoFile" accept="image/*" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="photoCaption">Caption</label>
-                            <input type="text" id="photoCaption" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="photoWeek">Week</label>
-                            <select id="photoWeek" required>
-                                <option value="week1">Week 1</option>
-                                <option value="week2">Week 2</option>
-                                <option value="week3">Week 3</option>
-                                <option value="week4">Week 4</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-secondary" style="width:100%;">Upload Photo</button>
-                    </form>
-                </div>
+            <div class="admin-form">
+                <h3 class="admin-form-title">Upload Photo to Gallery</h3>
+                <form id="photoForm" onsubmit="addPhoto(event)">
+                    <div class="form-group">
+                        <label for="photoFile">Photo File</label>
+                        <input type="file" id="photoFile" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="photoCaption">Caption</label>
+                        <input type="text" id="photoCaption" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="photoWeek">Week</label>
+                        <select id="photoWeek" required>
+                            <option value="week1">Week 1</option>
+                            <option value="week2">Week 2</option>
+                            <option value="week3">Week 3</option>
+                            <option value="week4">Week 4</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-secondary" style="width:100%;">Upload Photo</button>
+                </form>
             </div>
         </div>
     </div>
@@ -2172,10 +2507,11 @@
         function unlockAdmin() {
             if (adminPassword.value === ADMIN_PASSWORD) {
                 adminLoginModal.style.display = 'none';
+                // Enable admin mode
+                document.body.classList.add('admin-mode');
+                document.getElementById('adminModeBar').classList.add('visible');
                 adminContent.classList.remove('hidden');
-                document.getElementById('admin').scrollIntoView({ behavior: 'smooth' });
-                loadAdminData();
-                showToast('Admin panel unlocked!', 'success');
+                showToast('Admin mode enabled!', 'success');
             } else {
                 showToast('Incorrect password', 'error');
                 adminPassword.value = '';
@@ -2183,6 +2519,8 @@
         }
 
         function lockAdmin() {
+            document.body.classList.remove('admin-mode');
+            document.getElementById('adminModeBar').classList.remove('visible');
             adminContent.classList.add('hidden');
             adminPassword.value = '';
             showToast('Admin session closed', 'info');
@@ -2191,30 +2529,6 @@
         adminPassword.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') unlockAdmin();
         });
-
-        // ADD EVENT FORM
-        function addEvent(e) {
-            e.preventDefault();
-
-            const event = {
-                id: Date.now(),
-                title: document.getElementById('eventTitle').value,
-                date: document.getElementById('eventDate').value,
-                time: document.getElementById('eventTime').value,
-                location: document.getElementById('eventLocation').value,
-                description: document.getElementById('eventDescription').value,
-                type: document.getElementById('eventType').value
-            };
-
-            let events = JSON.parse(localStorage.getItem('customEvents')) || [];
-            events.push(event);
-            localStorage.setItem('customEvents', JSON.stringify(events));
-
-            document.getElementById('eventForm').reset();
-            loadAdminData();
-            renderEvents();
-            showToast('Event added successfully!', 'success');
-        }
 
         // ADD PHOTO FORM (admin — upload with optional caption/week tag)
         async function addPhoto(e) {
@@ -2251,42 +2565,6 @@
             }
         }
 
-        // LOAD ADMIN DATA
-        function loadAdminData() {
-            const events = JSON.parse(localStorage.getItem('customEvents')) || [];
-            const adminEventsList = document.getElementById('adminEventsList');
-            adminEventsList.innerHTML = '';
-
-            if (events.length === 0) {
-                adminEventsList.innerHTML = '<p style="color: #999; text-align: center; padding: 2rem;">No custom events added yet</p>';
-                return;
-            }
-
-            events.forEach(event => {
-                const eventEl = document.createElement('div');
-                eventEl.className = 'admin-item';
-                eventEl.innerHTML = `
-                    <div class="admin-item-info">
-                        <div class="admin-item-title">${event.title}</div>
-                        <div class="admin-item-detail">${event.date} at ${event.time}</div>
-                        <div class="admin-item-detail">${event.location}</div>
-                    </div>
-                    <button class="btn-delete" onclick="deleteEvent(${event.id})">Delete</button>
-                `;
-                adminEventsList.appendChild(eventEl);
-            });
-        }
-
-        // DELETE EVENT
-        function deleteEvent(id) {
-            let events = JSON.parse(localStorage.getItem('customEvents')) || [];
-            events = events.filter(e => e.id !== id);
-            localStorage.setItem('customEvents', JSON.stringify(events));
-            loadAdminData();
-            renderEvents(); // also triggers calendar refresh via renderEvents
-            showToast('Event deleted', 'info');
-        }
-
         // RENDER CUSTOM EVENTS — clears admin-added cards then re-appends fresh
         function renderEvents() {
             const events = JSON.parse(localStorage.getItem('customEvents')) || [];
@@ -2296,27 +2574,346 @@
             eventsGrid.querySelectorAll('.event-card.admin-event').forEach(el => el.remove());
 
             events.forEach(event => {
-                const eventCard = document.createElement('div');
-                eventCard.className = 'event-card admin-event';
-                eventCard.innerHTML = `
-                    <div class="event-header">
-                        <div class="event-icon-circle">📌</div>
-                        <span class="event-tag">${event.type}</span>
-                    </div>
-                    <div class="event-body">
-                        <h3 class="event-title">${event.title}</h3>
-                        <div class="event-meta">
-                            <div class="event-meta-item">📅 ${formatEventDate(event.date)} • ${event.time}</div>
-                            <div class="event-meta-item">📍 ${event.location}</div>
-                        </div>
-                        <p class="event-description">${event.description}</p>
-                    </div>
-                `;
+                const eventCard = buildEventCard(event);
                 eventsGrid.appendChild(eventCard);
             });
 
             // Sync calendar with updated events
             refreshCalendarWithAdminEvents();
+        }
+
+        function buildEventCard(event) {
+            const card = document.createElement('div');
+            card.className = 'event-card admin-event';
+            card.setAttribute('data-event-id', 'custom-' + event.id);
+            card.innerHTML = `
+                <div class="event-header">
+                    <div class="event-icon-circle">📌</div>
+                    <span class="event-tag">${event.type}</span>
+                </div>
+                <div class="event-body">
+                    <h3 class="event-title">${event.title}</h3>
+                    <div class="event-meta">
+                        <div class="event-meta-item">📅 ${formatEventDate(event.date)} • ${event.time}</div>
+                        <div class="event-meta-item">📍 ${event.location}</div>
+                    </div>
+                    <p class="event-description">${event.description}</p>
+                </div>
+                <div class="event-card-admin-bar">
+                    <button class="card-edit-btn" onclick="openEventEdit(this.closest('.event-card'))">✏️ Edit</button>
+                    <button class="card-delete-btn" onclick="deleteEventCard(this.closest('.event-card'))">🗑 Delete</button>
+                </div>
+            `;
+            return card;
+        }
+
+        // ---- INLINE EDIT MODAL ----
+        let inlineEditContext = null; // { mode: 'event'|'course'|'info'|'add', card, eventId }
+
+        function openAddEventModal() {
+            inlineEditContext = { mode: 'add' };
+            document.getElementById('inlineEditTitle').textContent = '＋ Add New Event';
+            document.getElementById('eventEditFields').style.display = '';
+            document.getElementById('courseEditFields').style.display = 'none';
+            document.getElementById('infoEditFields').style.display = 'none';
+            document.getElementById('inlineEditSaveBtn').textContent = 'Add Event';
+            // Clear fields
+            document.getElementById('ieEventTitle').value = '';
+            document.getElementById('ieEventDate').value = '';
+            document.getElementById('ieEventTime').value = '';
+            document.getElementById('ieEventLocation').value = '';
+            document.getElementById('ieEventDescription').value = '';
+            document.getElementById('ieEventType').value = 'Social';
+            document.getElementById('inlineEditModal').classList.add('open');
+            document.getElementById('ieEventTitle').focus();
+        }
+
+        function openEventEdit(card) {
+            const eventId = card.getAttribute('data-event-id');
+            inlineEditContext = { mode: 'event', card, eventId };
+            document.getElementById('inlineEditTitle').textContent = '✏️ Edit Event';
+            document.getElementById('eventEditFields').style.display = '';
+            document.getElementById('courseEditFields').style.display = 'none';
+            document.getElementById('infoEditFields').style.display = 'none';
+            document.getElementById('inlineEditSaveBtn').textContent = 'Save Changes';
+
+            // Pre-fill from card DOM
+            const title = card.querySelector('.event-title')?.textContent || '';
+            const metaItems = card.querySelectorAll('.event-meta-item');
+            let dateStr = '', timeStr = '', location = '';
+            metaItems.forEach(m => {
+                const t = m.textContent.trim();
+                if (t.startsWith('📅')) {
+                    const parts = t.replace('📅 ', '').split(' • ');
+                    dateStr = parseDisplayDate(parts[0]);
+                    timeStr = parts[1] || '';
+                } else if (t.startsWith('📍')) {
+                    location = t.replace('📍 ', '');
+                }
+            });
+            const description = card.querySelector('.event-description')?.textContent || '';
+            const typeTag = card.querySelector('.event-tag')?.textContent || 'Social';
+
+            document.getElementById('ieEventTitle').value = title;
+            document.getElementById('ieEventDate').value = dateStr;
+            document.getElementById('ieEventTime').value = timeStr;
+            document.getElementById('ieEventLocation').value = location;
+            document.getElementById('ieEventDescription').value = description;
+            document.getElementById('ieEventType').value = typeTag;
+
+            // If it's a custom event, load from localStorage for accurate data
+            if (eventId && eventId.startsWith('custom-')) {
+                const numId = parseInt(eventId.replace('custom-', ''));
+                const events = JSON.parse(localStorage.getItem('customEvents')) || [];
+                const ev = events.find(e => e.id === numId);
+                if (ev) {
+                    document.getElementById('ieEventTitle').value = ev.title;
+                    document.getElementById('ieEventDate').value = ev.date;
+                    document.getElementById('ieEventTime').value = ev.time;
+                    document.getElementById('ieEventLocation').value = ev.location;
+                    document.getElementById('ieEventDescription').value = ev.description;
+                    document.getElementById('ieEventType').value = ev.type;
+                }
+            }
+
+            document.getElementById('inlineEditModal').classList.add('open');
+        }
+
+        function openCourseEdit(card) {
+            inlineEditContext = { mode: 'course', card };
+            document.getElementById('inlineEditTitle').textContent = '✏️ Edit Course';
+            document.getElementById('eventEditFields').style.display = 'none';
+            document.getElementById('courseEditFields').style.display = '';
+            document.getElementById('infoEditFields').style.display = 'none';
+            document.getElementById('inlineEditSaveBtn').textContent = 'Save Changes';
+
+            const courseId = card.getAttribute('data-course-id');
+            const saved = JSON.parse(localStorage.getItem('customCourses') || '{}');
+            if (saved[courseId]) {
+                document.getElementById('ieCourseTitle').value = saved[courseId].title || '';
+                document.getElementById('ieCourseDates').value = saved[courseId].dates || '';
+                document.getElementById('ieCourseDescription').value = saved[courseId].description || '';
+                document.getElementById('ieCourseProf').value = saved[courseId].prof || '';
+            } else {
+                document.getElementById('ieCourseTitle').value = card.querySelector('.course-header')?.textContent.trim() || '';
+                document.getElementById('ieCourseDates').value = card.querySelector('.course-dates')?.textContent.replace('📅 ', '') || '';
+                document.getElementById('ieCourseDescription').value = card.querySelector('.course-description')?.textContent || '';
+                document.getElementById('ieCourseProf').value = card.querySelector('.course-professor')?.textContent || '';
+            }
+
+            document.getElementById('inlineEditModal').classList.add('open');
+        }
+
+        function openInfoEdit(infoValueEl) {
+            if (!document.body.classList.contains('admin-mode')) return;
+            const key = infoValueEl.getAttribute('data-info-key');
+            const label = infoValueEl.closest('.info-item')?.querySelector('.info-label')?.textContent || key;
+            inlineEditContext = { mode: 'info', el: infoValueEl, key };
+            document.getElementById('inlineEditTitle').textContent = '✏️ Edit Info';
+            document.getElementById('eventEditFields').style.display = 'none';
+            document.getElementById('courseEditFields').style.display = 'none';
+            document.getElementById('infoEditFields').style.display = '';
+            document.getElementById('infoEditLabel').textContent = label;
+            document.getElementById('inlineEditSaveBtn').textContent = 'Save Changes';
+            // Convert <br> to newlines for textarea
+            document.getElementById('ieInfoValue').value = infoValueEl.innerHTML.replace(/<br\s*\/?>/gi, '\n');
+            document.getElementById('inlineEditModal').classList.add('open');
+        }
+
+        function closeInlineEditModal() {
+            document.getElementById('inlineEditModal').classList.remove('open');
+            inlineEditContext = null;
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('inlineEditModal').addEventListener('click', function(e) {
+            if (e.target === this) closeInlineEditModal();
+        });
+
+        function saveInlineEdit() {
+            if (!inlineEditContext) return;
+            const { mode, card, eventId, el, key } = inlineEditContext;
+
+            if (mode === 'add') {
+                const title = document.getElementById('ieEventTitle').value.trim();
+                const date = document.getElementById('ieEventDate').value;
+                const time = document.getElementById('ieEventTime').value;
+                const location = document.getElementById('ieEventLocation').value.trim();
+                const description = document.getElementById('ieEventDescription').value.trim();
+                const type = document.getElementById('ieEventType').value;
+                if (!title || !date || !location) { showToast('Please fill in required fields', 'error'); return; }
+
+                const newEvent = { id: Date.now(), title, date, time, location, description, type };
+                let events = JSON.parse(localStorage.getItem('customEvents')) || [];
+                events.push(newEvent);
+                localStorage.setItem('customEvents', JSON.stringify(events));
+                renderEvents();
+                showToast('Event added!', 'success');
+
+            } else if (mode === 'event') {
+                const title = document.getElementById('ieEventTitle').value.trim();
+                const date = document.getElementById('ieEventDate').value;
+                const time = document.getElementById('ieEventTime').value;
+                const location = document.getElementById('ieEventLocation').value.trim();
+                const description = document.getElementById('ieEventDescription').value.trim();
+                const type = document.getElementById('ieEventType').value;
+
+                // Update DOM in place
+                const titleEl = card.querySelector('.event-title');
+                if (titleEl) titleEl.textContent = title;
+                const tagEl = card.querySelector('.event-tag');
+                if (tagEl) tagEl.textContent = type;
+                const descEl = card.querySelector('.event-description');
+                if (descEl) descEl.textContent = description;
+                const metaItems = card.querySelectorAll('.event-meta-item');
+                metaItems.forEach(m => {
+                    const t = m.textContent.trim();
+                    if (t.startsWith('📅')) m.textContent = `📅 ${formatEventDate(date)} • ${time}`;
+                    else if (t.startsWith('📍')) m.textContent = `📍 ${location}`;
+                });
+
+                // Update localStorage if it's a custom event
+                if (eventId && eventId.startsWith('custom-')) {
+                    const numId = parseInt(eventId.replace('custom-', ''));
+                    let events = JSON.parse(localStorage.getItem('customEvents')) || [];
+                    events = events.map(e => e.id === numId ? { ...e, title, date, time, location, description, type } : e);
+                    localStorage.setItem('customEvents', JSON.stringify(events));
+                }
+                refreshCalendarWithAdminEvents();
+                showToast('Event updated!', 'success');
+
+            } else if (mode === 'course') {
+                const courseId = card.getAttribute('data-course-id');
+                const title = document.getElementById('ieCourseTitle').value.trim();
+                const dates = document.getElementById('ieCourseDates').value.trim();
+                const description = document.getElementById('ieCourseDescription').value.trim();
+                const prof = document.getElementById('ieCourseProf').value.trim();
+
+                // Update DOM
+                const headerEl = card.querySelector('.course-header');
+                if (headerEl) {
+                    // Preserve the edit button
+                    const btn = headerEl.previousElementSibling;
+                    headerEl.textContent = title;
+                }
+                const datesEl = card.querySelector('.course-dates');
+                if (datesEl) datesEl.textContent = '📅 ' + dates;
+                const descEl = card.querySelector('.course-description');
+                if (descEl) descEl.textContent = description;
+                const profEl = card.querySelector('.course-professor');
+                if (profEl) profEl.textContent = prof;
+
+                // Save to localStorage
+                const saved = JSON.parse(localStorage.getItem('customCourses') || '{}');
+                saved[courseId] = { title, dates, description, prof };
+                localStorage.setItem('customCourses', JSON.stringify(saved));
+                showToast('Course updated!', 'success');
+
+            } else if (mode === 'info') {
+                const value = document.getElementById('ieInfoValue').value;
+                // Convert newlines to <br>
+                el.innerHTML = value.replace(/\n/g, '<br>');
+                const saved = JSON.parse(localStorage.getItem('infoContent') || '{}');
+                saved[key] = value;
+                localStorage.setItem('infoContent', JSON.stringify(saved));
+                showToast('Info updated!', 'success');
+            }
+
+            closeInlineEditModal();
+        }
+
+        // HERO TEXT EDITING
+        function initHeroEditing() {
+            const heroTitle = document.getElementById('heroTitle');
+            const heroSubtitle = document.getElementById('heroSubtitle');
+
+            // Restore from localStorage
+            const saved = JSON.parse(localStorage.getItem('heroContent') || '{}');
+            if (saved.title) heroTitle.innerHTML = saved.title;
+            if (saved.subtitle) heroSubtitle.innerHTML = saved.subtitle;
+
+            heroTitle.addEventListener('click', () => {
+                if (!document.body.classList.contains('admin-mode')) return;
+                heroTitle.contentEditable = 'true';
+                heroTitle.focus();
+            });
+            heroTitle.addEventListener('blur', () => {
+                heroTitle.contentEditable = 'false';
+                const saved = JSON.parse(localStorage.getItem('heroContent') || '{}');
+                saved.title = heroTitle.innerHTML;
+                localStorage.setItem('heroContent', JSON.stringify(saved));
+            });
+
+            heroSubtitle.addEventListener('click', () => {
+                if (!document.body.classList.contains('admin-mode')) return;
+                heroSubtitle.contentEditable = 'true';
+                heroSubtitle.focus();
+            });
+            heroSubtitle.addEventListener('blur', () => {
+                heroSubtitle.contentEditable = 'false';
+                const saved = JSON.parse(localStorage.getItem('heroContent') || '{}');
+                saved.subtitle = heroSubtitle.innerHTML;
+                localStorage.setItem('heroContent', JSON.stringify(saved));
+            });
+        }
+
+        // RESTORE INFO CONTENT
+        function restoreInfoContent() {
+            const saved = JSON.parse(localStorage.getItem('infoContent') || '{}');
+            Object.entries(saved).forEach(([key, val]) => {
+                const el = document.querySelector(`[data-info-key="${key}"]`);
+                if (el) el.innerHTML = val.replace(/\n/g, '<br>');
+            });
+        }
+
+        // RESTORE COURSE EDITS
+        function restoreCourseEdits() {
+            const saved = JSON.parse(localStorage.getItem('customCourses') || '{}');
+            Object.entries(saved).forEach(([courseId, data]) => {
+                const card = document.querySelector(`[data-course-id="${courseId}"]`);
+                if (!card) return;
+                if (data.title) {
+                    const h = card.querySelector('.course-header');
+                    if (h) h.textContent = data.title;
+                }
+                if (data.dates) {
+                    const d = card.querySelector('.course-dates');
+                    if (d) d.textContent = '📅 ' + data.dates;
+                }
+                if (data.description) {
+                    const d = card.querySelector('.course-description');
+                    if (d) d.textContent = data.description;
+                }
+                if (data.prof) {
+                    const p = card.querySelector('.course-professor');
+                    if (p) p.textContent = data.prof;
+                }
+            });
+        }
+
+        // DELETE EVENT CARD
+        function deleteEventCard(card) {
+            if (!confirm('Delete this event?')) return;
+            const eventId = card.getAttribute('data-event-id');
+            if (eventId && eventId.startsWith('custom-')) {
+                const numId = parseInt(eventId.replace('custom-', ''));
+                let events = JSON.parse(localStorage.getItem('customEvents')) || [];
+                events = events.filter(e => e.id !== numId);
+                localStorage.setItem('customEvents', JSON.stringify(events));
+            }
+            card.remove();
+            refreshCalendarWithAdminEvents();
+            showToast('Event deleted', 'info');
+        }
+
+        // Helper: parse display date back to YYYY-MM-DD for pre-filling date inputs
+        function parseDisplayDate(str) {
+            if (!str) return '';
+            try {
+                const d = new Date(str);
+                if (isNaN(d)) return '';
+                return d.toISOString().slice(0, 10);
+            } catch { return ''; }
         }
 
         // Format date string "2025-07-14" → "July 14, 2025"
@@ -2466,6 +3063,9 @@
             renderEvents();
             loadGallery();
             renderCalendar('june');
+            initHeroEditing();
+            restoreInfoContent();
+            restoreCourseEdits();
         });
     </script>
 </body>
