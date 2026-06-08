@@ -3049,37 +3049,37 @@
         }
 
         // CALENDAR DATA
-        const CAL_DATA = {
+        const CAL_DATA = { // time field shown in calendar popup
             // key: "YYYY-M-D"
             // Classes
-            '2025-6-22': [{ type:'special', text:'🎉 Opening Day' }, { type:'event', text:'🍹 Happy Hour' }, { type:'class', text:'Neuromarketing (A)' }, { type:'class', text:'Venture Capital (B)' }],
-            '2025-6-23': [{ type:'class', text:'Neuromarketing (A)' }, { type:'class', text:'Venture Capital (B)' }],
-            '2025-6-24': [{ type:'class', text:'Neuromarketing (A)' }, { type:'class', text:'Venture Capital (B)' }],
-            '2025-6-25': [{ type:'class', text:'Neuromarketing (A)' }, { type:'class', text:'Venture Capital (B)' }],
-            '2025-6-26': [{ type:'class', text:'Neuromarketing (A)' }, { type:'class', text:'Venture Capital (B)' }, { type:'event', text:'🍩 Dough Nut Be Late to Class' }],
-            '2025-6-27': [{ type:'class', text:'New Product Dev (A)' }],
-            '2025-6-28': [{ type:'class', text:'New Product Dev (A)' }],
-            '2025-6-29': [{ type:'class', text:'Private Equity (A)' }, { type:'event', text:'🍪 Surprise & Delights' }],
-            '2025-6-30': [{ type:'class', text:'Private Equity (A)' }],
-            '2025-7-1':  [{ type:'class', text:'Private Equity (A)' }, { type:'event', text:'🇺🇸 Independence Day Picnic' }],
-            '2025-7-2':  [{ type:'class', text:'Private Equity (A)' }],
-            '2025-7-3':  [{ type:'class', text:'Private Equity (A)' }],
-            '2025-7-4':  [{ type:'holiday', text:'🇺🇸 US Independence Day — No Class' }],
+            '2025-6-22': [{ type:'special', text:'🎉 Opening Day', time:'All Day' }, { type:'event', text:'🍹 Happy Hour', time:'5:00 PM' }, { type:'class', text:'Neuromarketing (A)', time:'9AM–4PM' }, { type:'class', text:'Venture Capital (B)', time:'9AM–4PM' }],
+            '2025-6-23': [{ type:'class', text:'Neuromarketing (A)', time:'9AM–4PM' }, { type:'class', text:'Venture Capital (B)', time:'9AM–4PM' }],
+            '2025-6-24': [{ type:'class', text:'Neuromarketing (A)', time:'9AM–4PM' }, { type:'class', text:'Venture Capital (B)', time:'9AM–4PM' }],
+            '2025-6-25': [{ type:'class', text:'Neuromarketing (A)', time:'9AM–4PM' }, { type:'class', text:'Venture Capital (B)', time:'9AM–4PM' }],
+            '2025-6-26': [{ type:'class', text:'Neuromarketing (A)', time:'9AM–4PM' }, { type:'class', text:'Venture Capital (B)', time:'9AM–4PM' }, { type:'event', text:'🍩 Dough Nut Be Late to Class', time:'8:00 AM' }],
+            '2025-6-27': [{ type:'class', text:'New Product Dev (A)', time:'9AM–5PM' }],
+            '2025-6-28': [{ type:'class', text:'New Product Dev (A)', time:'9AM–5PM' }],
+            '2025-6-29': [{ type:'class', text:'Private Equity (A)', time:'9AM–4PM' }, { type:'event', text:'🍪 Surprise & Delights', time:'3:00 PM' }],
+            '2025-6-30': [{ type:'class', text:'Private Equity (A)', time:'9AM–4PM' }],
+            '2025-7-1':  [{ type:'class', text:'Private Equity (A)', time:'9AM–4PM' }, { type:'event', text:'🇺🇸 Independence Day Picnic', time:'12:00 PM' }],
+            '2025-7-2':  [{ type:'class', text:'Private Equity (A)', time:'9AM–4PM' }],
+            '2025-7-3':  [{ type:'class', text:'Private Equity (A)', time:'9AM–4PM' }],
+            '2025-7-4':  [{ type:'holiday', text:'🇺🇸 US Independence Day — No Class', time:'All Day' }],
             '2025-7-5':  [],
-            '2025-7-6':  [{ type:'class', text:'Biz Analysis (A)' }, { type:'event', text:'🥯 NY Bagel Social' }],
-            '2025-7-7':  [{ type:'class', text:'Biz Analysis (A)' }],
-            '2025-7-8':  [{ type:'class', text:'Biz Analysis (A)' }],
-            '2025-7-9':  [{ type:'class', text:'Biz Analysis (A)' }, { type:'event', text:'🎤 Speaker & Alumni Panel' }],
-            '2025-7-10': [{ type:'class', text:'Biz Analysis (A)' }],
-            '2025-7-11': [{ type:'class', text:'M&A (A)' }, { type:'class', text:'Luxury Brand (B)' }, { type:'event', text:'🧁 Surprise & Delights' }],
-            '2025-7-12': [{ type:'class', text:'M&A (A)' }, { type:'class', text:'Luxury Brand (B)' }, { type:'event', text:'🌇 Manhattanhenge Walk' }],
-            '2025-7-13': [{ type:'class', text:'Biz Analysis (A)' }, { type:'class', text:'PG City Seminar (B)' }, { type:'event', text:'🍹 Happy Hour' }],
-            '2025-7-14': [{ type:'class', text:'Biz Analysis (A)' }, { type:'class', text:'PG City Seminar (B)' }],
-            '2025-7-15': [{ type:'class', text:'Biz Analysis (A)' }, { type:'class', text:'PG City Seminar (B)' }],
-            '2025-7-16': [{ type:'class', text:'Biz Analysis (A)' }, { type:'class', text:'PG City Seminar (B)' }],
-            '2025-7-17': [{ type:'class', text:'Biz Analysis (A)' }, { type:'class', text:'PG City Seminar (B)' }],
-            '2025-7-18': [{ type:'class', text:'AI Trends Finance (A)' }, { type:'event', text:'🌯 Wrapping NY!' }],
-            '2025-7-19': [{ type:'class', text:'AI Trends Finance (A)' }, { type:'special', text:'🎊 Closing Day' }],
+            '2025-7-6':  [{ type:'class', text:'Biz Analysis (A)', time:'9AM–12PM' }, { type:'event', text:'🥯 NY Bagel Social', time:'8:30 AM' }],
+            '2025-7-7':  [{ type:'class', text:'Biz Analysis (A)', time:'9AM–12PM' }],
+            '2025-7-8':  [{ type:'class', text:'Biz Analysis (A)', time:'9AM–12PM' }],
+            '2025-7-9':  [{ type:'class', text:'Biz Analysis (A)', time:'9AM–12PM' }, { type:'event', text:'🎤 Speaker & Alumni Panel', time:'2:00 PM' }],
+            '2025-7-10': [{ type:'class', text:'Biz Analysis (A)', time:'9AM–12PM' }],
+            '2025-7-11': [{ type:'class', text:'M&A (A)', time:'9AM–5PM' }, { type:'class', text:'Luxury Brand (B)', time:'9AM–5PM' }, { type:'event', text:'🧁 Surprise & Delights', time:'3:00 PM' }],
+            '2025-7-12': [{ type:'class', text:'M&A (A)', time:'9AM–5PM' }, { type:'class', text:'Luxury Brand (B)', time:'9AM–5PM' }, { type:'event', text:'🌇 Manhattanhenge Walk', time:'8:00 PM' }],
+            '2025-7-13': [{ type:'class', text:'Biz Analysis (A)', time:'9AM–12PM' }, { type:'class', text:'PG City Seminar (B)', time:'9AM–5PM' }, { type:'event', text:'🍹 Happy Hour', time:'5:00 PM' }],
+            '2025-7-14': [{ type:'class', text:'Biz Analysis (A)', time:'9AM–12PM' }, { type:'class', text:'PG City Seminar (B)', time:'9AM–5PM' }],
+            '2025-7-15': [{ type:'class', text:'Biz Analysis (A)', time:'9AM–12PM' }, { type:'class', text:'PG City Seminar (B)', time:'9AM–5PM' }],
+            '2025-7-16': [{ type:'class', text:'Biz Analysis (A)', time:'9AM–12PM' }, { type:'class', text:'PG City Seminar (B)', time:'9AM–5PM' }],
+            '2025-7-17': [{ type:'class', text:'Biz Analysis (A)', time:'9AM–12PM' }, { type:'class', text:'PG City Seminar (B)', time:'9AM–5PM' }],
+            '2025-7-18': [{ type:'class', text:'AI Trends Finance (A)', time:'9AM–5PM' }, { type:'event', text:'🌯 Wrapping NY!', time:'4:00 PM' }],
+            '2025-7-19': [{ type:'class', text:'AI Trends Finance (A)', time:'9AM–4PM' }, { type:'special', text:'🎊 Closing Day', time:'All Day' }],
         };
 
         function showMonth(month, btn) {
@@ -3106,8 +3106,8 @@
                 const key = `${year}-${d.getMonth()+1}-${d.getDate()}`;
                 if (!calData[key]) calData[key] = [];
                 // Avoid duplicates on re-render
-                if (!calData[key].some(e => e.text === ev.title && e.type === 'event')) {
-                    calData[key].push({ type: 'event', text: `📌 ${ev.title}` });
+                if (!calData[key].some(e => e.text === `📌 ${ev.title}` && e.type === 'event')) {
+                    calData[key].push({ type: 'event', text: `📌 ${ev.title}`, time: ev.time || '' });
                 }
             });
 
@@ -3153,7 +3153,8 @@
                 // Desktop: show pills as before
                 entries.slice(0, 3).forEach(e => {
                     const pillClass = e.type === 'class' ? 'cal-pill-class' : e.type === 'event' ? 'cal-pill-event' : e.type === 'holiday' ? 'cal-pill-holiday' : 'cal-pill-special';
-                    html += `<span class="cal-event-pill ${pillClass}" title="${e.text}">${e.text}</span>`;
+                    const label = e.time ? `${e.text} · ${e.time}` : e.text;
+                    html += `<span class="cal-event-pill ${pillClass}" title="${label}">${label}</span>`;
                 });
                 if (entries.length > 3) {
                     html += `<span style="font-size:0.65rem;color:rgba(255,255,255,0.4);">+${entries.length - 3} more</span>`;
@@ -3183,7 +3184,10 @@
             const pillColor = { class: '#a8f0e8', event: '#ffb3d9', holiday: '#ffe0a0', special: 'white' };
             document.getElementById('calPopupDate').textContent = `${data.monthName} ${data.day}, ${data.year}`;
             document.getElementById('calPopupEntries').innerHTML = data.entries.map(e =>
-                `<div class="cal-day-popup-entry" style="background:${pillBg[e.type]||pillBg.special};color:${pillColor[e.type]||'white'}">${e.text}</div>`
+                `<div class="cal-day-popup-entry" style="background:${pillBg[e.type]||pillBg.special};color:${pillColor[e.type]||'white'}">
+                    <div style="font-weight:700">${e.text}</div>
+                    ${e.time ? `<div style="font-size:0.75rem;opacity:0.8;margin-top:2px">🕐 ${e.time}</div>` : ''}
+                </div>`
             ).join('');
             document.getElementById('calDayPopup').classList.add('active');
         }
