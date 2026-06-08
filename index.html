@@ -781,6 +781,45 @@
             box-shadow: 0 20px 60px rgba(192, 0, 106, 0.2);
         }
 
+        .gallery-delete-btn {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: rgba(192,0,106,0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            line-height: 1;
+        }
+        body.admin-mode .gallery-delete-btn { display: flex; }
+        body.admin-mode .gallery-item:hover .gallery-delete-btn { background: var(--magenta); }
+
+        .gallery-load-more {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .gallery-load-more-btn {
+            padding: 0.9rem 2.5rem;
+            background: var(--navy);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        .gallery-load-more-btn:hover { background: var(--magenta); border-color: var(--magenta); }
+
         /* Select mode */
         .gallery-item .select-checkbox {
             display: none;
@@ -2170,6 +2209,9 @@
             </div>
 
             <div class="gallery-grid" id="galleryGrid"></div>
+            <div class="gallery-load-more" id="galleryLoadMore" style="display:none;">
+                <button class="gallery-load-more-btn" onclick="loadMorePhotos()">Load More Photos</button>
+            </div>
         </div>
     </section>
 
@@ -2480,11 +2522,17 @@
             el.className = 'gallery-item';
             el.setAttribute('data-week', week);
             el.setAttribute('data-caption', caption);
+            el.setAttribute('data-public-id', photo.public_id);
             el.innerHTML = `
                 <div class="select-checkbox">✓</div>
+                <button class="gallery-delete-btn" title="Delete photo">✕</button>
                 <img src="${thumbUrl}" alt="${caption}" loading="lazy">
                 <div class="gallery-caption"><div class="gallery-caption-title">${caption}</div></div>
             `;
+            el.querySelector('.gallery-delete-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                deleteGalleryPhoto(photo.public_id, el);
+            });
             el.addEventListener('click', () => {
                 if (selectMode) {
                     el.classList.toggle('selected');
@@ -2496,17 +2544,49 @@
             return el;
         }
 
-        // RENDER GALLERY
+        async function deleteGalleryPhoto(publicId, el) {
+            if (!confirm('Delete this photo for everyone?')) return;
+            // Remove from Supabase
+            try {
+                await fetch(`${SUPABASE_URL}/rest/v1/gallery_photos?public_id=eq.${encodeURIComponent(publicId)}`, {
+                    method: 'DELETE',
+                    headers: SUPABASE_HEADERS
+                });
+            } catch(e) { console.error('Delete failed', e); }
+            // Remove from local array and DOM
+            allPhotos = allPhotos.filter(p => p.public_id !== publicId);
+            el.remove();
+            showToast('Photo deleted', 'success');
+            // Update load more visibility
+            const filtered = currentFilter === 'all' ? allPhotos : allPhotos.filter(p => p.week === currentFilter);
+            document.getElementById('galleryLoadMore').style.display = filtered.length > visibleCount ? 'block' : 'none';
+        }
+
+        const GALLERY_PAGE_SIZE = 12;
+        let visibleCount = GALLERY_PAGE_SIZE;
+
         function renderGallery() {
             galleryGrid.innerHTML = '';
+            visibleCount = GALLERY_PAGE_SIZE;
             const filtered = currentFilter === 'all' ? allPhotos : allPhotos.filter(p => p.week === currentFilter);
             const emptyEl = document.getElementById('galleryEmpty');
+            const loadMoreEl = document.getElementById('galleryLoadMore');
             if (filtered.length === 0) {
                 emptyEl.style.display = 'block';
+                loadMoreEl.style.display = 'none';
             } else {
                 emptyEl.style.display = 'none';
-                filtered.forEach(photo => galleryGrid.appendChild(createGalleryItem(photo)));
+                filtered.slice(0, visibleCount).forEach(photo => galleryGrid.appendChild(createGalleryItem(photo)));
+                loadMoreEl.style.display = filtered.length > visibleCount ? 'block' : 'none';
             }
+        }
+
+        function loadMorePhotos() {
+            const filtered = currentFilter === 'all' ? allPhotos : allPhotos.filter(p => p.week === currentFilter);
+            const prev = visibleCount;
+            visibleCount = Math.min(visibleCount + GALLERY_PAGE_SIZE, filtered.length);
+            filtered.slice(prev, visibleCount).forEach(photo => galleryGrid.appendChild(createGalleryItem(photo)));
+            document.getElementById('galleryLoadMore').style.display = visibleCount < filtered.length ? 'block' : 'none';
         }
 
         // LOAD PHOTOS FROM CLOUDINARY
