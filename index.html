@@ -2361,7 +2361,11 @@
         const CLOUD_NAME = 'dhcpgzvvl';
         const UPLOAD_PRESET = 'hult_nyc_gallery';
         const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
-        const CLOUDINARY_LIST_URL = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/hult_nyc.json`;
+
+        // SUPABASE CONFIG
+        const SUPABASE_URL = 'https://ypfcqzzkuekvwvgeslkr.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwZmNxenprdWVrdnd2Z2VzbGtyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDI0ODAsImV4cCI6MjA5NjUxODQ4MH0.d5JBxkonDpd1hC2pkTVccL5Ea7v7rZkDjA8_80R_UhM';
+        const SUPABASE_HEADERS = { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' };
 
         // GALLERY STATE
         const lightbox = document.getElementById('lightbox');
@@ -2506,50 +2510,36 @@
         }
 
         // LOAD PHOTOS FROM CLOUDINARY
-        const GALLERY_STORAGE_KEY = 'hultNycGallery';
-
-        function savePhotoToStorage(photo) {
-            const stored = JSON.parse(localStorage.getItem(GALLERY_STORAGE_KEY) || '[]');
-            if (!stored.find(p => p.public_id === photo.public_id)) {
-                stored.unshift(photo);
-                localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(stored));
-            }
-        }
-
-        function getStoredPhotos() {
-            return JSON.parse(localStorage.getItem(GALLERY_STORAGE_KEY) || '[]');
-        }
-
         async function loadGallery() {
-            // Start with locally stored photos so gallery shows immediately
-            const stored = getStoredPhotos();
-            allPhotos = stored;
-            renderGallery();
-
-            // Then try to fetch from Cloudinary and merge
             try {
-                const res = await fetch(CLOUDINARY_LIST_URL);
-                if (!res.ok) throw new Error('list unavailable');
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/gallery_photos?select=*&order=created_at.desc`, { headers: SUPABASE_HEADERS });
                 const data = await res.json();
-                const remote = (data.resources || []).map(r => ({
+                allPhotos = (data || []).map(r => ({
                     public_id: r.public_id,
-                    secure_url: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${r.public_id}`,
-                    caption: r.context?.custom?.caption || r.public_id.split('/').pop().replace(/_/g, ' '),
-                    week: r.context?.custom?.week || 'all',
+                    secure_url: r.secure_url,
+                    caption: r.caption || r.public_id.split('/').pop().replace(/_/g, ' '),
+                    week: r.week || 'all',
                     created_at: r.created_at
                 }));
-                // Merge: remote is source of truth, fill gaps with stored
-                const merged = [...remote];
-                stored.forEach(p => {
-                    if (!merged.find(r => r.public_id === p.public_id)) merged.push(p);
-                });
-                allPhotos = merged.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-                // Persist any new remote photos locally for other users
-                allPhotos.forEach(savePhotoToStorage);
             } catch (e) {
-                // Keep stored photos as fallback
+                allPhotos = [];
             }
             renderGallery();
+        }
+
+        async function savePhotoToSupabase(photo) {
+            try {
+                await fetch(`${SUPABASE_URL}/rest/v1/gallery_photos`, {
+                    method: 'POST',
+                    headers: { ...SUPABASE_HEADERS, 'Prefer': 'return=minimal' },
+                    body: JSON.stringify({
+                        public_id: photo.public_id,
+                        secure_url: photo.secure_url,
+                        caption: photo.caption,
+                        week: photo.week || 'all'
+                    })
+                });
+            } catch(e) { console.error('Supabase save failed', e); }
         }
 
         // BULK UPLOAD TO CLOUDINARY
@@ -2587,7 +2577,7 @@
                             created_at: new Date().toISOString()
                         };
                         allPhotos.unshift(photo);
-                        savePhotoToStorage(photo);
+                        await savePhotoToSupabase(photo);
                     }
                 } catch (err) {
                     console.error('Upload failed for', file.name, err);
