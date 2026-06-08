@@ -330,33 +330,33 @@
         /* SCHEDULE SECTION */
         .schedule-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.2rem;
+            margin-top: 2rem;
         }
 
         .course-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 10px 40px var(--dark-shadow);
+            box-shadow: 0 6px 24px var(--dark-shadow);
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .course-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(192, 0, 106, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 14px 40px rgba(192, 0, 106, 0.15);
         }
 
         .course-header {
-            height: 120px;
+            height: 70px;
             display: flex;
-            align-items: flex-end;
-            padding: 2rem;
+            align-items: center;
+            padding: 0 1.2rem;
             color: white;
             font-weight: 700;
-            font-size: 1.3rem;
+            font-size: 1rem;
             background: linear-gradient(135deg, var(--navy) 0%, #0d4a7a 100%);
         }
 
@@ -377,38 +377,38 @@
         }
 
         .course-body {
-            padding: 2rem;
+            padding: 1rem 1.2rem;
         }
 
         .course-dates {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--magenta);
             font-weight: 600;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .course-description {
             color: #666;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+            line-height: 1.5;
         }
 
         .course-professor {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--navy);
             font-weight: 600;
-            padding-top: 1rem;
+            padding-top: 0.6rem;
             border-top: 1px solid #eee;
-            margin-top: 1rem;
+            margin-top: 0.6rem;
         }
 
         /* EVENTS SECTION */
         .events-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.4rem;
+            margin-top: 2rem;
         }
 
         .event-card {
@@ -435,7 +435,7 @@
 
         .event-header {
             background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
-            padding: 2rem;
+            padding: 1.1rem 1.3rem;
             color: white;
             display: flex;
             justify-content: space-between;
@@ -443,14 +443,14 @@
         }
 
         .event-icon-circle {
-            width: 60px;
-            height: 60px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             flex-shrink: 0;
         }
 
@@ -466,25 +466,25 @@
         }
 
         .event-body {
-            padding: 2rem;
+            padding: 1.1rem 1.3rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
 
         .event-title {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--navy);
-            margin-bottom: 1rem;
+            margin-bottom: 0.6rem;
         }
 
         .event-meta {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
+            gap: 0.3rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.82rem;
             color: #666;
         }
 
@@ -496,9 +496,9 @@
 
         .event-description {
             color: #666;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.8rem;
             flex-grow: 1;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
         .btn {
@@ -1483,16 +1483,24 @@
             .pill { padding: 0.6rem 1rem; font-size: 0.8rem; }
 
             /* SECTIONS */
-            .section { padding: 60px 0; }
-            .section-title { font-size: 2rem; }
-            .container { padding: 0 1.2rem; }
+            .section { padding: 40px 0; }
+            .section-title { font-size: 1.7rem; }
+            .section-header { margin-bottom: 1.2rem; }
+            .container { padding: 0 1rem; }
 
             /* SCHEDULE */
-            .schedule-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .schedule-grid { grid-template-columns: 1fr; gap: 0.8rem; margin-top: 1rem; }
+            .course-header { height: 56px; font-size: 0.92rem; }
+            .course-body { padding: 0.7rem 1rem; }
+            .course-description { font-size: 0.8rem; margin-bottom: 0.5rem; }
 
             /* EVENTS */
-            .events-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .event-card { margin-top: 14px; } /* space for featured badge */
+            .events-grid { grid-template-columns: 1fr; gap: 1rem; margin-top: 1rem; }
+            .event-card { margin-top: 14px; }
+            .event-header { padding: 0.9rem 1rem; }
+            .event-icon-circle { width: 38px; height: 38px; font-size: 1.1rem; }
+            .event-body { padding: 0.9rem 1rem; }
+            .event-title { font-size: 1rem; margin-bottom: 0.4rem; }
 
             /* CALENDAR */
             .cal-grid { gap: 2px; }
@@ -1502,20 +1510,22 @@
             .cal-day-header { font-size: 0.65rem; padding: 0.5rem 0; }
             .cal-month-tabs { gap: 0.6rem; }
             .cal-tab { padding: 0.5rem 1.2rem; font-size: 0.8rem; }
-            .cal-legend { gap: 1rem; font-size: 0.75rem; }
+            .cal-legend { gap: 0.7rem; font-size: 0.72rem; flex-wrap: wrap; }
 
             /* GALLERY */
             .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-            #uploadArea { padding: 1.5rem 1rem; }
-            .select-toolbar { padding: 0.8rem 1rem; }
+            #uploadArea { padding: 1.2rem 1rem; }
+            .select-toolbar { padding: 0.6rem 1rem; font-size: 0.8rem; }
 
             /* INFO */
-            .info-container { grid-template-columns: 1fr; gap: 2rem; }
-            .stats-box { grid-template-columns: 1fr 1fr; gap: 1rem; }
-            .info-text { font-size: 1rem; }
+            .info-container { grid-template-columns: 1fr; gap: 1.5rem; }
+            .stats-box { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+            .info-text { font-size: 0.9rem; line-height: 1.6; }
+            .stat-number { font-size: 1.8rem; }
+            .stat-label { font-size: 0.75rem; }
 
             /* ADMIN PANEL */
-            .admin-panel { grid-template-columns: 1fr; gap: 2rem; }
+            .admin-panel { grid-template-columns: 1fr; gap: 1.5rem; }
 
             /* INLINE EDIT MODAL */
             .inline-edit-box { width: 95vw; max-height: 90vh; overflow-y: auto; padding: 1.5rem; }
@@ -1530,15 +1540,16 @@
 
         @media (max-width: 480px) {
             /* HERO */
-            .hero-title { font-size: 1.8rem; }
-            .hero-subtitle { font-size: 0.9rem; }
-            .pill { padding: 0.5rem 0.8rem; font-size: 0.72rem; }
-            .pill-tags { gap: 0.5rem; }
+            .hero-title { font-size: 1.6rem; }
+            .hero-subtitle { font-size: 0.85rem; }
+            .pill { padding: 0.4rem 0.7rem; font-size: 0.68rem; }
+            .pill-tags { gap: 0.4rem; }
 
             /* SECTIONS */
-            .section-title { font-size: 1.6rem; }
-            .eyebrow { font-size: 0.75rem; }
-            .container { padding: 0 1rem; }
+            .section { padding: 30px 0; }
+            .section-title { font-size: 1.4rem; }
+            .eyebrow { font-size: 0.7rem; }
+            .container { padding: 0 0.9rem; }
 
             /* CALENDAR — single letter day headers on tiny screens */
             .cal-day-header { font-size: 0.6rem; letter-spacing: 0; }
@@ -2313,8 +2324,10 @@
         function openLightbox(src, caption) {
             lightboxImage.src = src;
             lightboxCaption.textContent = caption;
-            // Use Cloudinary's fl_attachment flag to force download of full-res image
-            const downloadUrl = src.includes('/upload/') ? src.replace('/upload/', '/upload/fl_attachment/') : src;
+            // Strip crop transforms, add fl_attachment for clean download
+            const downloadUrl = src.includes('/upload/')
+                ? src.replace(/\/upload\/[^/]*\//, '/upload/fl_attachment,q_auto/')
+                : src;
             const dlBtn = document.getElementById('lightboxDownload');
             dlBtn.href = downloadUrl;
             dlBtn.download = caption ? caption.replace(/\s+/g, '_') + '.jpg' : 'hult_nyc_photo.jpg';
@@ -2366,27 +2379,31 @@
 
             for (const item of selected) {
                 const img = item.querySelector('img');
-                const caption = item.getAttribute('data-caption') || 'hult_nyc_photo';
+                const caption = (item.getAttribute('data-caption') || 'hult_nyc_photo').replace(/\s+/g, '_');
                 const src = img.src;
-                const downloadUrl = src.includes('/upload/') ? src.replace('/upload/', '/upload/fl_attachment/') : src;
+                // Use full-res (remove crop transforms) + fl_attachment for download
+                let downloadUrl = src;
+                if (src.includes('/upload/')) {
+                    downloadUrl = src.replace(/\/upload\/[^/]*\//, '/upload/fl_attachment,q_auto/');
+                }
 
                 try {
-                    const res = await fetch(downloadUrl);
+                    const res = await fetch(downloadUrl, { mode: 'cors' });
+                    if (!res.ok) throw new Error('fetch failed');
                     const blob = await res.blob();
-                    const url = URL.createObjectURL(blob);
+                    const blobUrl = URL.createObjectURL(blob);
                     const a = document.createElement('a');
-                    a.href = url;
-                    a.download = caption.replace(/\s+/g, '_') + '.jpg';
+                    a.href = blobUrl;
+                    a.download = caption + '.jpg';
+                    document.body.appendChild(a);
                     a.click();
-                    URL.revokeObjectURL(url);
-                    await new Promise(r => setTimeout(r, 400)); // slight delay between downloads
+                    document.body.removeChild(a);
+                    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
                 } catch (e) {
-                    const a = document.createElement('a');
-                    a.href = downloadUrl;
-                    a.download = caption.replace(/\s+/g, '_') + '.jpg';
-                    a.target = '_blank';
-                    a.click();
+                    // fallback: open in new tab (browser will download)
+                    window.open(downloadUrl, '_blank');
                 }
+                await new Promise(r => setTimeout(r, 600));
             }
 
             showToast('Download complete!', 'success');
@@ -3068,6 +3085,7 @@
                 if (isOpening) cls += ' opening';
                 if (isClosing) cls += ' closing';
                 if (isToday) cls += ' today';
+                if (entries.length > 0) cls += ' has-event';
 
                 html += `<div class="${cls}">`;
                 html += `<div class="cal-day-num">${d}</div>`;
