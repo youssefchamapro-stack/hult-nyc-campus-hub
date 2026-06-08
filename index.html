@@ -3094,7 +3094,8 @@
             const year = 2025;
             const monthNum = isJune ? 6 : 7;
             const daysInMonth = isJune ? 30 : 31;
-            // June 1 = Monday (0 empty cells), July 1 = Wednesday (2 empty cells)
+            // June 22=Mon → June 1=Mon (21 days back, 21%7=0). firstDay=0.
+            // July 1=Wed (June 30=Tue, +1=Wed). firstDay=2. July 4=Sat.
             const firstDay = isJune ? 0 : 2;
 
             // Merge admin-added events into a working copy of CAL_DATA
