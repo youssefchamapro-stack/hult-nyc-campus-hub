@@ -3110,6 +3110,8 @@
                     calData[key].push({ type: 'event', text: `📌 ${ev.title}`, time: ev.time || '' });
                 }
             });
+            // Apply any admin time overrides on top of static + admin events
+            applyCalTimeOverrides(calData);
 
             const today = new Date();
             const dayHeaders = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -3138,7 +3140,7 @@
                 const isOpening = key === '2025-6-22';
                 const isClosing = key === '2025-7-19';
 
-                window._calDayEntries[month][d] = { entries, monthName: monthNames[monthNum], day: d, year };
+                window._calDayEntries[month][d] = { entries, monthName: monthNames[monthNum], monthNum, day: d, year };
 
                 let cls = 'cal-day';
                 if (isOpening) cls += ' opening';
@@ -3177,20 +3179,59 @@
             container.innerHTML = html;
         }
 
+        const CAL_TIME_KEY = 'calTimeOverrides'; // { "2025-6-22|🎉 Opening Day": "9:00 AM", ... }
+
+        function getCalTimeOverrides() {
+            return JSON.parse(localStorage.getItem(CAL_TIME_KEY) || '{}');
+        }
+
+        function applyCalTimeOverrides(calData) {
+            const overrides = getCalTimeOverrides();
+            Object.keys(overrides).forEach(k => {
+                const [dayKey, entryText] = k.split('|');
+                if (calData[dayKey]) {
+                    const entry = calData[dayKey].find(e => e.text === entryText);
+                    if (entry) entry.time = overrides[k];
+                }
+            });
+        }
+
         function openCalPopup(month, day) {
             const data = (window._calDayEntries[month] || {})[day];
             if (!data || !data.entries.length) return;
             const pillBg = { class: 'rgba(13,122,107,0.5)', event: 'rgba(192,0,106,0.5)', holiday: 'rgba(200,168,75,0.4)', special: 'rgba(255,255,255,0.1)' };
             const pillColor = { class: '#a8f0e8', event: '#ffb3d9', holiday: '#ffe0a0', special: 'white' };
+            const isAdmin = document.body.classList.contains('admin-mode');
+            const dayKey = `${data.year}-${data.monthNum}-${data.day}`;
             document.getElementById('calPopupDate').textContent = `${data.monthName} ${data.day}, ${data.year}`;
-            document.getElementById('calPopupEntries').innerHTML = data.entries.map(e =>
-                `<div class="cal-day-popup-entry" style="background:${pillBg[e.type]||pillBg.special};color:${pillColor[e.type]||'white'}">
+            document.getElementById('calPopupEntries').innerHTML = data.entries.map((e, i) => {
+                const editBtn = isAdmin
+                    ? `<button onclick="editCalEntryTime('${dayKey}','${e.text.replace(/'/g,"\\'")}',${i},'${month}',${day})" style="margin-top:5px;padding:2px 8px;font-size:0.7rem;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);border-radius:20px;color:white;cursor:pointer;">✏️ Edit Time</button>`
+                    : '';
+                return `<div class="cal-day-popup-entry" style="background:${pillBg[e.type]||pillBg.special};color:${pillColor[e.type]||'white'}">
                     <div style="font-weight:700">${e.text}</div>
-                    ${e.time ? `<div style="font-size:0.75rem;opacity:0.8;margin-top:2px">🕐 ${e.time}</div>` : ''}
-                </div>`
-            ).join('');
+                    ${e.time ? `<div style="font-size:0.75rem;opacity:0.8;margin-top:2px">🕐 ${e.time}</div>` : '<div style="font-size:0.75rem;opacity:0.5;margin-top:2px">🕐 No time set</div>'}
+                    ${editBtn}
+                </div>`;
+            }).join('');
             document.getElementById('calDayPopup').classList.add('active');
         }
+
+        function editCalEntryTime(dayKey, entryText, idx, month, day) {
+            const data = (window._calDayEntries[month] || {})[day];
+            const entry = data && data.entries[idx];
+            const current = entry ? (entry.time || '') : '';
+            const newTime = prompt(`Edit time for:\n"${entryText}"\n\nEnter new time (e.g. 9AM–4PM, 5:00 PM):`, current);
+            if (newTime === null) return; // cancelled
+            const overrides = getCalTimeOverrides();
+            overrides[`${dayKey}|${entryText}`] = newTime.trim();
+            localStorage.setItem(CAL_TIME_KEY, JSON.stringify(overrides));
+            // Re-render calendar and reopen popup
+            const activeTab = document.querySelector('.cal-tab.active');
+            renderCalendar(activeTab && activeTab.textContent.toLowerCase().includes('june') ? 'june' : 'july');
+            openCalPopup(month, day);
+        }
+
         function closeCalPopup() {
             document.getElementById('calDayPopup').classList.remove('active');
         }
