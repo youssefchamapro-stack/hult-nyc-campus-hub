@@ -1443,6 +1443,30 @@
                 <h2 class="section-title">Photo Gallery</h2>
                 <div class="divider"></div>
             </div>
+
+            <!-- Upload area — open to everyone -->
+            <div id="uploadArea" style="border:2px dashed rgba(10,31,92,0.25);border-radius:20px;padding:2.5rem;text-align:center;margin-bottom:2.5rem;background:rgba(255,255,255,0.7);transition:all 0.3s ease;">
+                <div style="font-size:2.5rem;margin-bottom:0.8rem;">📸</div>
+                <p style="color:var(--navy);font-weight:700;font-size:1.1rem;margin-bottom:0.4rem;">Share your photos!</p>
+                <p style="color:#666;font-size:0.9rem;margin-bottom:1.5rem;">Select one or many photos — they'll appear in the gallery for everyone</p>
+                <label for="bulkUploadInput" class="btn btn-primary" style="cursor:pointer;display:inline-block;">
+                    Choose Photos
+                </label>
+                <input type="file" id="bulkUploadInput" accept="image/*" multiple style="display:none;">
+                <p style="color:#aaa;font-size:0.8rem;margin-top:1rem;">JPG, PNG, HEIC supported · No limit on number of photos</p>
+            </div>
+
+            <!-- Upload progress -->
+            <div id="uploadProgress" style="display:none;margin-bottom:2rem;">
+                <div style="background:rgba(255,255,255,0.8);border-radius:12px;padding:1.5rem;text-align:center;">
+                    <div id="uploadProgressText" style="color:var(--navy);font-weight:600;margin-bottom:1rem;">Uploading photos...</div>
+                    <div style="background:#eee;border-radius:50px;height:8px;overflow:hidden;">
+                        <div id="uploadProgressBar" style="height:100%;background:linear-gradient(90deg,var(--magenta),var(--teal));border-radius:50px;width:0%;transition:width 0.3s ease;"></div>
+                    </div>
+                    <div id="uploadProgressCount" style="color:#666;font-size:0.85rem;margin-top:0.8rem;">0 / 0</div>
+                </div>
+            </div>
+
             <div class="gallery-filters">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="week1">Week 1</button>
@@ -1450,92 +1474,13 @@
                 <button class="filter-btn" data-filter="week3">Week 3</button>
                 <button class="filter-btn" data-filter="week4">Week 4</button>
             </div>
-            <div class="gallery-grid" id="galleryGrid">
-                <div class="gallery-item" data-week="week1" data-caption="Welcome Orientation">
-                    <img src="https://picsum.photos/seed/nyc_orientation/600/400" alt="Welcome Orientation">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Welcome Orientation</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week1" data-caption="First Day at Campus">
-                    <img src="https://picsum.photos/seed/nyc_campus/600/400" alt="First Day at Campus">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">First Day at Campus</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week1" data-caption="Classroom Moments">
-                    <img src="https://picsum.photos/seed/nyc_classroom/600/400" alt="Classroom Moments">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Classroom Moments</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week1" data-caption="Welcome Dinner">
-                    <img src="https://picsum.photos/seed/nyc_dinner1/600/400" alt="Welcome Dinner">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Welcome Dinner</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week2" data-caption="Central Park Run">
-                    <img src="https://picsum.photos/seed/nyc_park/600/400" alt="Central Park Run">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Central Park Run</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week2" data-caption="Wall Street Tour">
-                    <img src="https://picsum.photos/seed/nyc_wallst/600/400" alt="Wall Street Tour">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Wall Street Tour</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week2" data-caption="Brooklyn Skyline">
-                    <img src="https://picsum.photos/seed/nyc_brooklyn/600/400" alt="Brooklyn Skyline">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Brooklyn Skyline</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week2" data-caption="Group Lunch">
-                    <img src="https://picsum.photos/seed/nyc_lunch/600/400" alt="Group Lunch">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Group Lunch</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week3" data-caption="Broadway Show">
-                    <img src="https://picsum.photos/seed/nyc_broadway/600/400" alt="Broadway Show">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Broadway Show</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week3" data-caption="MoMA Visit">
-                    <img src="https://picsum.photos/seed/nyc_moma/600/400" alt="MoMA Visit">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">MoMA Visit</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week3" data-caption="Networking Event">
-                    <img src="https://picsum.photos/seed/nyc_network/600/400" alt="Networking Event">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Networking Event</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week4" data-caption="Capstone Presentations">
-                    <img src="https://picsum.photos/seed/nyc_capstone/600/400" alt="Capstone Presentations">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Capstone Presentations</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week4" data-caption="Farewell Celebration">
-                    <img src="https://picsum.photos/seed/nyc_farewell/600/400" alt="Farewell Celebration">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Farewell Celebration</div>
-                    </div>
-                </div>
-                <div class="gallery-item" data-week="week4" data-caption="Group Photo">
-                    <img src="https://picsum.photos/seed/nyc_group/600/400" alt="Group Photo">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">Group Photo</div>
-                    </div>
-                </div>
+
+            <div id="galleryEmpty" style="display:none;text-align:center;padding:4rem 2rem;color:#999;">
+                <div style="font-size:3rem;margin-bottom:1rem;">🖼️</div>
+                <p style="font-size:1.1rem;">No photos yet — be the first to share a memory!</p>
             </div>
+
+            <div class="gallery-grid" id="galleryGrid"></div>
         </div>
     </section>
 
@@ -1762,53 +1707,159 @@
             });
         });
 
-        // GALLERY LIGHTBOX
+        // CLOUDINARY CONFIG
+        const CLOUD_NAME = 'dhcpgzvvl';
+        const UPLOAD_PRESET = 'hult_nyc_gallery';
+        const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+        const CLOUDINARY_LIST_URL = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/hult_nyc.json`;
+
+        // GALLERY STATE
         const lightbox = document.getElementById('lightbox');
         const lightboxImage = document.getElementById('lightboxImage');
         const lightboxCaption = document.getElementById('lightboxCaption');
         const lightboxClose = document.getElementById('lightboxClose');
-        const galleryItems = document.querySelectorAll('.gallery-item');
+        const galleryGrid = document.getElementById('galleryGrid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        let currentFilter = 'all';
+        let allPhotos = [];
 
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const img = item.querySelector('img');
-                const caption = item.getAttribute('data-caption');
-                lightboxImage.src = img.src;
-                lightboxCaption.textContent = caption;
-                lightbox.classList.add('active');
-            });
-        });
+        // LIGHTBOX
+        lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('active'); });
 
-        lightboxClose.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
-            }
-        });
+        function openLightbox(src, caption) {
+            lightboxImage.src = src;
+            lightboxCaption.textContent = caption;
+            lightbox.classList.add('active');
+        }
 
         // GALLERY FILTERS
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const galleryGrid = document.getElementById('galleryGrid');
-
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
-                const filterValue = btn.getAttribute('data-filter');
-                const items = galleryGrid.querySelectorAll('.gallery-item');
-
-                items.forEach(item => {
-                    if (filterValue === 'all' || item.getAttribute('data-week') === filterValue) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
+                currentFilter = btn.getAttribute('data-filter');
+                renderGallery();
             });
+        });
+
+        // BUILD GALLERY ITEM
+        function createGalleryItem(photo) {
+            const week = photo.week || 'all';
+            const caption = photo.caption || photo.public_id.split('/').pop().replace(/_/g, ' ');
+            const url = photo.secure_url || `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_600,h_400,q_auto,f_auto/${photo.public_id}`;
+            const thumbUrl = url.includes('/upload/') ? url.replace('/upload/', '/upload/c_fill,w_600,h_400,q_auto,f_auto/') : url;
+
+            const el = document.createElement('div');
+            el.className = 'gallery-item';
+            el.setAttribute('data-week', week);
+            el.setAttribute('data-caption', caption);
+            el.innerHTML = `
+                <img src="${thumbUrl}" alt="${caption}" loading="lazy">
+                <div class="gallery-caption"><div class="gallery-caption-title">${caption}</div></div>
+            `;
+            el.addEventListener('click', () => openLightbox(url, caption));
+            return el;
+        }
+
+        // RENDER GALLERY
+        function renderGallery() {
+            galleryGrid.innerHTML = '';
+            const filtered = currentFilter === 'all' ? allPhotos : allPhotos.filter(p => p.week === currentFilter);
+            const emptyEl = document.getElementById('galleryEmpty');
+            if (filtered.length === 0) {
+                emptyEl.style.display = 'block';
+            } else {
+                emptyEl.style.display = 'none';
+                filtered.forEach(photo => galleryGrid.appendChild(createGalleryItem(photo)));
+            }
+        }
+
+        // LOAD PHOTOS FROM CLOUDINARY
+        async function loadGallery() {
+            try {
+                const res = await fetch(CLOUDINARY_LIST_URL);
+                if (!res.ok) throw new Error('No photos yet');
+                const data = await res.json();
+                allPhotos = (data.resources || []).map(r => ({
+                    public_id: r.public_id,
+                    secure_url: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${r.public_id}`,
+                    caption: r.context?.custom?.caption || r.public_id.split('/').pop().replace(/_/g, ' '),
+                    week: r.context?.custom?.week || 'all',
+                    created_at: r.created_at
+                })).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            } catch (e) {
+                allPhotos = [];
+            }
+            renderGallery();
+        }
+
+        // BULK UPLOAD TO CLOUDINARY
+        document.getElementById('bulkUploadInput').addEventListener('change', async (e) => {
+            const files = Array.from(e.target.files);
+            if (!files.length) return;
+
+            const progressEl = document.getElementById('uploadProgress');
+            const progressBar = document.getElementById('uploadProgressBar');
+            const progressText = document.getElementById('uploadProgressText');
+            const progressCount = document.getElementById('uploadProgressCount');
+
+            progressEl.style.display = 'block';
+            let done = 0;
+
+            for (const file of files) {
+                progressText.textContent = `Uploading ${file.name}...`;
+                progressCount.textContent = `${done} / ${files.length}`;
+
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', UPLOAD_PRESET);
+                formData.append('folder', 'hult_nyc');
+                formData.append('tags', 'hult_nyc');
+
+                try {
+                    const res = await fetch(CLOUDINARY_UPLOAD_URL, { method: 'POST', body: formData });
+                    const data = await res.json();
+                    if (data.secure_url) {
+                        allPhotos.unshift({
+                            public_id: data.public_id,
+                            secure_url: data.secure_url,
+                            caption: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
+                            week: 'all',
+                            created_at: new Date().toISOString()
+                        });
+                    }
+                } catch (err) {
+                    console.error('Upload failed for', file.name, err);
+                }
+
+                done++;
+                progressBar.style.width = `${Math.round((done / files.length) * 100)}%`;
+                progressCount.textContent = `${done} / ${files.length}`;
+            }
+
+            progressText.textContent = `✓ ${done} photo${done !== 1 ? 's' : ''} uploaded!`;
+            progressBar.style.background = 'var(--teal)';
+            setTimeout(() => { progressEl.style.display = 'none'; progressBar.style.width = '0%'; progressBar.style.background = ''; }, 3000);
+
+            e.target.value = '';
+            renderGallery();
+            showToast(`${done} photo${done !== 1 ? 's' : ''} uploaded successfully!`, 'success');
+        });
+
+        // DRAG & DROP support on upload area
+        const uploadArea = document.getElementById('uploadArea');
+        uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.style.borderColor = 'var(--magenta)'; uploadArea.style.background = 'rgba(192,0,106,0.05)'; });
+        uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = ''; uploadArea.style.background = ''; });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '';
+            uploadArea.style.background = '';
+            const input = document.getElementById('bulkUploadInput');
+            const dt = new DataTransfer();
+            Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')).forEach(f => dt.items.add(f));
+            input.files = dt.files;
+            input.dispatchEvent(new Event('change'));
         });
 
         // ADMIN PANEL
@@ -1872,32 +1923,38 @@
             showToast('Event added successfully!', 'success');
         }
 
-        // ADD PHOTO FORM
-        function addPhoto(e) {
+        // ADD PHOTO FORM (admin — upload with optional caption/week tag)
+        async function addPhoto(e) {
             e.preventDefault();
-
             const fileInput = document.getElementById('photoFile');
             const file = fileInput.files[0];
+            if (!file) return;
 
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    const photo = {
-                        id: Date.now(),
-                        src: event.target.result,
+            showToast('Uploading photo...', 'info');
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', UPLOAD_PRESET);
+            formData.append('folder', 'hult_nyc');
+            formData.append('tags', 'hult_nyc');
+            formData.append('context', `caption=${document.getElementById('photoCaption').value}|week=${document.getElementById('photoWeek').value}`);
+
+            try {
+                const res = await fetch(CLOUDINARY_UPLOAD_URL, { method: 'POST', body: formData });
+                const data = await res.json();
+                if (data.secure_url) {
+                    allPhotos.unshift({
+                        public_id: data.public_id,
+                        secure_url: data.secure_url,
                         caption: document.getElementById('photoCaption').value,
-                        week: document.getElementById('photoWeek').value
-                    };
-
-                    let photos = JSON.parse(localStorage.getItem('customPhotos')) || [];
-                    photos.push(photo);
-                    localStorage.setItem('customPhotos', JSON.stringify(photos));
-
+                        week: document.getElementById('photoWeek').value,
+                        created_at: new Date().toISOString()
+                    });
                     document.getElementById('photoForm').reset();
                     renderGallery();
-                    showToast('Photo uploaded successfully!', 'success');
-                };
-                reader.readAsDataURL(file);
+                    showToast('Photo uploaded!', 'success');
+                }
+            } catch (err) {
+                showToast('Upload failed', 'error');
             }
         }
 
@@ -1964,32 +2021,6 @@
             });
         }
 
-        // RENDER CUSTOM PHOTOS
-        function renderGallery() {
-            const photos = JSON.parse(localStorage.getItem('customPhotos')) || [];
-            const galleryGrid = document.getElementById('galleryGrid');
-
-            photos.forEach(photo => {
-                const photoEl = document.createElement('div');
-                photoEl.className = 'gallery-item';
-                photoEl.setAttribute('data-week', photo.week);
-                photoEl.setAttribute('data-caption', photo.caption);
-                photoEl.innerHTML = `
-                    <img src="${photo.src}" alt="${photo.caption}">
-                    <div class="gallery-caption">
-                        <div class="gallery-caption-title">${photo.caption}</div>
-                    </div>
-                `;
-
-                photoEl.addEventListener('click', () => {
-                    lightboxImage.src = photo.src;
-                    lightboxCaption.textContent = photo.caption;
-                    lightbox.classList.add('active');
-                });
-
-                galleryGrid.appendChild(photoEl);
-            });
-        }
 
         // TOAST NOTIFICATIONS
         function showToast(message, type = 'info') {
@@ -2014,7 +2045,7 @@
         // INIT
         window.addEventListener('load', () => {
             renderEvents();
-            renderGallery();
+            loadGallery();
         });
     </script>
 </body>
