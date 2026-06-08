@@ -3094,8 +3094,8 @@
             const year = 2025;
             const monthNum = isJune ? 6 : 7;
             const daysInMonth = isJune ? 30 : 31;
-            const firstDayRaw = new Date(year, monthNum - 1, 1).getDay(); // 0=Sun
-            const firstDay = (firstDayRaw + 6) % 7; // Mon=0
+            // June 1 = Monday (0 empty cells), July 1 = Tuesday (1 empty cell)
+            const firstDay = isJune ? 0 : 1;
 
             // Merge admin-added events into a working copy of CAL_DATA
             const calData = JSON.parse(JSON.stringify(CAL_DATA)); // deep clone static data
