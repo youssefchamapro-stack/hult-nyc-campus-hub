@@ -3365,11 +3365,7 @@
         let _siteTextCache = {}; // in-memory cache
 
         async function restoreSiteText() {
-            try {
-                const res = await fetch(`${SUPABASE_URL}/rest/v1/site_settings?key=eq.siteText`, { headers: SUPABASE_HEADERS });
-                const rows = await res.json();
-                if (rows && rows[0]) _siteTextCache = JSON.parse(rows[0].value || '{}');
-            } catch(e) { _siteTextCache = {}; }
+            _siteTextCache = _store['siteText'] || {};
             document.querySelectorAll('[data-editable][data-key]').forEach(el => {
                 const k = el.getAttribute('data-key');
                 if (_siteTextCache[k] !== undefined) el.innerHTML = _siteTextCache[k];
