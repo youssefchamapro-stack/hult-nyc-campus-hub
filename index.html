@@ -3417,6 +3417,7 @@
 
         async function saveSiteText(key, html) {
             _siteTextCache[key] = html;
+            _store['siteText'] = _siteTextCache; // keep _store in sync
             await supabaseSet('siteText', _siteTextCache);
         }
 
