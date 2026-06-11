@@ -3009,7 +3009,21 @@
                     else if (t.startsWith('📍')) m.textContent = `📍 ${location}`;
                 });
 
-                // Update localStorage if it's a custom event
+                // Save hardcoded event fields to Supabase via siteText
+                if (eventId && eventId.startsWith('hc-')) {
+                    const evNum = eventId.replace('hc-', '');
+                    const evKey = `ev${evNum}`;
+                    saveSiteText(`${evKey}-title`, title);
+                    saveSiteText(`${evKey}-tag`, type);
+                    saveSiteText(`${evKey}-desc`, description);
+                    saveSiteText(`${evKey}-date`, `📅 ${formatEventDate(date)} • ${time}`);
+                    saveSiteText(`${evKey}-location`, `📍 ${location}`);
+                    // Re-render calendar so pill moves to new date
+                    const activeTab = document.querySelector('.cal-tab.active');
+                    renderCalendar(activeTab && activeTab.textContent.toLowerCase().includes('june') ? 'june' : 'july');
+                }
+
+                // Update Supabase if it's a custom event
                 if (eventId && eventId.startsWith('custom-')) {
                     const numId = parseInt(eventId.replace('custom-', ''));
                     let events = storeGet('customEvents') || [];
