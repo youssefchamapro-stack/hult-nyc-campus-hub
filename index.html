@@ -3009,15 +3009,18 @@
                     else if (t.startsWith('📍')) m.textContent = `📍 ${location}`;
                 });
 
-                // Save hardcoded event fields to Supabase via siteText
+                // Save hardcoded event fields to Supabase via siteText (single write)
                 if (eventId && eventId.startsWith('hc-')) {
                     const evNum = eventId.replace('hc-', '');
                     const evKey = `ev${evNum}`;
-                    saveSiteText(`${evKey}-title`, title);
-                    saveSiteText(`${evKey}-tag`, type);
-                    saveSiteText(`${evKey}-desc`, description);
-                    saveSiteText(`${evKey}-date`, `📅 ${formatEventDate(date)} • ${time}`);
-                    saveSiteText(`${evKey}-location`, `📍 ${location}`);
+                    // Batch all updates into _siteTextCache first, then write once
+                    _siteTextCache[`${evKey}-title`] = title;
+                    _siteTextCache[`${evKey}-tag`] = type;
+                    _siteTextCache[`${evKey}-desc`] = description;
+                    _siteTextCache[`${evKey}-date`] = `📅 ${formatEventDate(date)}${time ? ' • ' + time : ''}`;
+                    _siteTextCache[`${evKey}-location`] = `📍 ${location}`;
+                    _store['siteText'] = _siteTextCache;
+                    supabaseSet('siteText', _siteTextCache); // single write, fire-and-forget
                     // Re-render calendar so pill moves to new date
                     const activeTab = document.querySelector('.cal-tab.active');
                     renderCalendar(activeTab && activeTab.textContent.toLowerCase().includes('june') ? 'june' : 'july');
